@@ -1,30 +1,35 @@
 import styled from 'styled-components';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import saleItems from '../../../data/sale';
 
 
 const Container = styled.div`
 width: 100%;
-height: 90px;
-background-color: #ffffff;
+height: 100px;
+background-color: #f3f3f3;
 display: flex;
 align-items: center;
 justify-content: space-between;
-position: absolute;
-overflow: scroll;
-`;
+overflow-y: hidden; 
+overflow-x: scroll; 
+ &::-webkit-scrollbar {
+    display: none;
+ }`;
 const SaleIcon = styled.div`
-width: 80px;
+width: 90px;
 height: 100%;
 right: -30px;
 position: relative;
+padding-bottom: 20px;
 `;
 const Story = styled.div`
-height: 60px;
+height: 90px;
 display: flex;
+
 `;
 const StoryItem = styled.div`
-width: 50px;
-height: 50px;
+width: 70px;
+height: 70px;
 background-color: #ffffff;
 display: flex;
 flex-wrap: wrap;
@@ -32,7 +37,7 @@ align-content: center;
 align-items: center;
 justify-content: center;
 border-radius: 50px;
-border: 2.5px solid  #f08140;
+border: 1.3px solid #f08140;
 margin: 0 3px;
 `;
 const ImgStory = styled.img`
@@ -44,46 +49,6 @@ border-radius: 50%;
 
 type Props = {}
 
-const saleItems = [
-    {
-        price: 3.90,
-        pic: "https://www.steimatzky.co.il/pub/media/catalog/product/cache/054fd023ed4beb824f3143faa6fcc008/0/5/055490002-1662877680140271.jpg",
-    },
-    {
-        name: "",
-        price: 4.00,
-        pic: "https://cdn.cashcow.co.il/images/f31b37b6-76e2-411c-86f5-9d23a8810717.jpg",
-    },
-    {
-        name: "",
-        price: 10.00,
-        pic: "https://m.media-amazon.com/images/I/61-PPjux-IL._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-        name: "",
-        price: 10.90,
-        pic: "https://www.dalas.co.il/wp-content/uploads/2019/07/%D7%99%D7%A2%D7%94-%D7%9E%D7%A4%D7%9C%D7%A1%D7%98%D7%99%D7%A7-300x300.jpg",
-    },
-    {
-        price: 3.90,
-        pic: "https://www.steimatzky.co.il/pub/media/catalog/product/cache/054fd023ed4beb824f3143faa6fcc008/0/5/055490002-1662877680140271.jpg",
-    },
-    {
-        name: "",
-        price: 4.00,
-        pic: "https://cdn.cashcow.co.il/images/f31b37b6-76e2-411c-86f5-9d23a8810717.jpg",
-    },
-    {
-        name: "",
-        price: 10.00,
-        pic: "https://m.media-amazon.com/images/I/61-PPjux-IL._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-        name: "",
-        price: 10.90,
-        pic: "https://www.dalas.co.il/wp-content/uploads/2019/07/%D7%99%D7%A2%D7%94-%D7%9E%D7%A4%D7%9C%D7%A1%D7%98%D7%99%D7%A7-300x300.jpg",
-    },
-]
 
 const SaleBunner = (props: Props) => {
 
@@ -93,9 +58,9 @@ const SaleBunner = (props: Props) => {
             <SaleIcon>
                 <Player
                     autoplay
-                    speed={2}
+                    speed={1}
                     loop={true}
-                    src="https://lottie.host/2a7a524a-4bc9-4a19-87fb-c5426a0703bd/ik2JXWlTkr.json"
+                    src="https://lottie.host/23e20bfe-b448-4d52-8d81-fe473c1419b8/O4gnSrVgOD.json"
                     style={{ height: '90px', width: '150px' }}
                 >
                 </Player>

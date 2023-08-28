@@ -15,7 +15,7 @@ margin-right: 2%;
 box-sizing: border-box;
 `;
 const Item = styled.div<{ background: string }>`
-width: 25%;
+width: 30%;
 aspect-ratio : 1 / 1;
 background-color: aqua;
 padding: 10px;
@@ -33,7 +33,7 @@ const Categories = (props: Props) => {
             {
                 categories.map((item: any, index: any) => {
                     return (
-                        <Item background={`url(${item.pic})`}>
+                        <Item background={`url(${item.pic})`} key={index}>
                             {/* {item.name} */}
                         </Item>
                     )

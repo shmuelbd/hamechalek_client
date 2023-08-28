@@ -69,7 +69,7 @@ const SaleBunner = (props: Props) => {
 
                 {
                     saleItems.map((item, index) => (
-                        <StoryItem>
+                        <StoryItem key={index}>
                             <ImgStory src={item.pic} />
                         </StoryItem>
                     )

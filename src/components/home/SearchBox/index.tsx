@@ -3,11 +3,14 @@ import styled from 'styled-components';
 const Container = styled.div`
 width: 100%;
 height: 70px;
-background-color: #f3f3f3;
+background-color: #ffffff;
+/* background-color: #f3f3f3; */
 display: flex;
 align-items: center;
 justify-content: space-between;
 border-radius: 0 0 30px 30px;
+-webkit-box-shadow: 0px 6px 5px -6px rgba(0,0,0,0.31); 
+box-shadow: 0px 6px 5px -6px rgba(0,0,0,0.31);
 `;
 const Txt = styled.p`
 font-size: 2.0vh;

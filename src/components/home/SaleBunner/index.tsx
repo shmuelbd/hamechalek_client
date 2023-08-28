@@ -6,7 +6,8 @@ import saleItems from '../../../data/sale';
 const Container = styled.div`
 width: 100%;
 height: 100px;
-background-color: #f3f3f3;
+background-color: #ffffff;
+/* background-color: #f3f3f3; */
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -37,7 +38,8 @@ align-content: center;
 align-items: center;
 justify-content: center;
 border-radius: 50px;
-border: 1.3px solid #f08140;
+border: 1.8px solid #7F5AFF;
+/* border: 1.3px solid #f08140; */
 margin: 0 3px;
 `;
 const ImgStory = styled.img`
@@ -61,7 +63,7 @@ const SaleBunner = (props: Props) => {
                     speed={1}
                     loop={true}
                     src="https://lottie.host/23e20bfe-b448-4d52-8d81-fe473c1419b8/O4gnSrVgOD.json"
-                    style={{ height: '90px', width: '150px' }}
+                    style={{ height: '70px', width: '150px' }}
                 >
                 </Player>
             </SaleIcon>

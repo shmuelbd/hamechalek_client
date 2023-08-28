@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -13,25 +14,43 @@ bottom: 0;
 left: 0;
 display: flex;
 align-items: center;
-/* justify-content: space-between; */
-/* padding: 0 10px; */
-/* overflow-y: hidden; 
-overflow-x: scroll; 
- &::-webkit-scrollbar {
-    display: none;
- } */
+user-select: none;
  `;
-const Item = styled.div`
+
+const Item = styled(NavLink)`
 display: flex;
 align-items: center;
 justify-content: center;
 width: 20%;
 font-size: 50px;
+text-decoration: none;
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-tap-highlight-color: transparent;
 & span{
     font-size: 35px;
     font-weight: 250;
+    color: #7F5AFF;
     }
+
+&:hover {
+    color: #4a83fd;
+}
+  &.active > p {
+    color: #cf002d;
+  }
+  &.active > span {
+    color: #019DDA;
+    font-size: 50px;
+    transition: 0.2s;
+  }
+ 
 `;
+
+
 
 type Props = {}
 
@@ -39,27 +58,27 @@ const menuItems = [
     {
         name: "profile",
         icon: "person",
-        link: ""
+        link: "profile"
     },
     {
         name: "sale",
         icon: "sell",
-        link: ""
+        link: "sale"
     },
     {
         name: "categories",
         icon: "grid_view",
-        link: ""
+        link: "categories"
     },
     {
         name: "home",
         icon: "home",
-        link: ""
+        link: "/"
     },
     {
         name: "cart",
         icon: "shopping_cart",
-        link: ""
+        link: "cart"
     },
 ]
 
@@ -68,7 +87,10 @@ const Footer = (props: Props) => {
         <Container>
             {
                 menuItems.map((item: any, index: any) => (
-                    <Item key={index}>
+                    <Item
+                        key={index}
+                        to={item.link}
+                    >
                         <span className="material-symbols-rounded">{item.icon}</span>
                     </Item>
                 ))

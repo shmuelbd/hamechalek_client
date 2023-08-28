@@ -3,7 +3,6 @@ import SaleBunner from './SaleBunner';
 import s from '../../assets/bgmilk2.jpg';
 import Categories from './Categories';
 import SearchBox from './SearchBox';
-import Footer from '../footer/indes';
 
 
 const Container = styled.div`
@@ -43,7 +42,6 @@ const Home = (props: Props) => {
             <SearchBox />
             <Bg />
             <Categories />
-            <Footer />
         </Container>
 
     )

@@ -15,7 +15,8 @@ overflow-y: hidden;
 overflow-x: scroll; 
  &::-webkit-scrollbar {
     display: none;
- }`;
+ }
+ `;
 const SaleIcon = styled.div`
 width: 90px;
 height: 100%;

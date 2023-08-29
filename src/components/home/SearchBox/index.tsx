@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from "framer-motion"
 
-const Container = styled.div`
+const Container = styled(motion.div)`
 width: 100%;
 height: 70px;
 background-color: #ffffff;
@@ -33,7 +34,22 @@ type Props = {}
 
 const SearchBox = (props: Props) => {
     return (
-        <Container>
+        <Container
+            initial={{
+                opacity: 0,
+                y: -10
+
+            }}
+            animate={{
+                opacity: 1,
+                y: 0,
+            }}
+            transition={{
+                // delay: (0.15 / 30)
+                duration: 0.7,
+
+            }}
+        >
             <Txt>זה המקום להכניס שם מוצר לחיפוש</Txt>
             <Icon>
                 <span className="material-symbols-outlined">search</span>

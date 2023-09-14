@@ -11,6 +11,8 @@ flex-wrap: wrap;
 height: 25 0px;
 margin-bottom: 30px;
 `;
+
+
 const Header = styled.div`
 width: 100%;
 display: flex;
@@ -19,8 +21,8 @@ height: 50px;
 /* background-color: #019DDA; */
 /* background-color: #7F5AFF; */
 background-color: #ffffff;
--webkit-box-shadow: 0px -18px 20px -6px rgba(0,0,0,0.24); 
-box-shadow: 0px -18px 20px -6px rgba(0,0,0,0.24);
+/* -webkit-box-shadow: 0px -18px 20px -6px rgba(0,0,0,0.24); 
+box-shadow: 0px -18px 20px -6px rgba(0,0,0,0.24); */
 border-bottom: 1px solid #f3f3f3;
 align-items: center;
 padding: 0 10px;
@@ -28,7 +30,7 @@ justify-content: center;
 position: relative;
 border-radius: 20px 20px 0 0;
 margin-bottom: 30px;
-
+text-align: center;
 `;
 const Icon = styled.div<{ background: string }>`
 width: 70px;
@@ -59,7 +61,7 @@ display: flex;
 flex-wrap: wrap;
 align-items: center;
 justify-content: space-between;
-
+padding: 0 10px;
 /* overflow-y: hidden; 
 overflow-x: scroll; 
  &::-webkit-scrollbar {
@@ -94,7 +96,7 @@ const MainCategory = (props: Props) => {
             }}
         >
             <Header>
-                <Icon background={`url(${props.item.pic})`} />
+                {/* <Icon background={`url(${props.item.pic})`} /> */}
                 <Title>
                     {props.item.name}
                 </Title>

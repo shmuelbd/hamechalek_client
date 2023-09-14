@@ -1,6 +1,23 @@
 import React from 'react'
 import styled from 'styled-components';
-
+import cook from "./images/cook.jpg"
+import cookies from "./images/cookies.jpg"
+import drink from "./images/drink.jpg"
+import jam from "./images/jam.jpg"
+import canning from "./images/canning.jpg"
+import cutlery from "./images/cutlery.jpg"
+import cups from "./images/cups.jpg"
+import Aluminum_molds from "./images/Aluminum_molds.jpg"
+import Aluminum_foil from "./images/Aluminum_foil.jpg"
+import nylon from "./images/nylon.jpg"
+import plastic_container from "./images/plastic_container.jpg"
+import plastic_wrap from "./images/plastic_wrap.jpg"
+import cleaners_floor from "./images/cleaners_floor.jpg"
+import toilet_brush from "./images/toilet_brush.jpg"
+import main_clean from "./images/main_clean.jpg"
+import laundry_detergents from "./images/laundry_detergents.jpg"
+import broom from "./images/broom.jpg"
+import disinfection from "./images/disinfection.jpg"
 
 const SubCatItem = styled.div`
 width: 100px;
@@ -13,11 +30,12 @@ text-align: center;
 `;
 const SubCatIcon = styled.div<{ background: string }>`
 min-width: 100px;
-height: 70px;
+height: 100px;
 border-radius: 50%;
 background-image: ${(props) => props.background} ;
-background-size: cover;
+background-size: contain;
 background-position: center;
+background-repeat: no-repeat;
 `;
 
 
@@ -26,12 +44,75 @@ type Props = {
     item: any
 }
 
+
+
 const SubCategory = (props: Props) => {
+
+    let image;
+    switch (props.item.pic) {
+        case "cook":
+            image = cook;
+            break;
+        case "cookies":
+            image = cookies;
+            break;
+        case "drink":
+            image = drink;
+            break;
+        case "jam":
+            image = jam;
+            break;
+        case "canning":
+            image = canning;
+            break;
+        case "cutlery":
+            image = cutlery;
+            break;
+        case "cups":
+            image = cups;
+            break;
+        case "Aluminum molds":
+            image = Aluminum_molds;
+            break;
+        case "Aluminum foil":
+            image = Aluminum_foil;
+            break;
+        case "nylon":
+            image = nylon;
+            break;
+        case "plastic_container":
+            image = plastic_container;
+            break;
+        case "plastic_wrap":
+            image = plastic_wrap;
+            break;
+        case "cleaners_floor":
+            image = cleaners_floor;
+            break;
+        case "toilet_brush":
+            image = toilet_brush;
+            break;
+        case "main_clean":
+            image = main_clean;
+            break;
+        case "laundry_detergents":
+            image = laundry_detergents;
+            break;
+        case "broom":
+            image = broom;
+            break;
+        case "disinfection":
+            image = disinfection;
+            break;
+        default:
+            break;
+    }
+
     return (
         <SubCatItem>
 
             <SubCatIcon key={props.index}
-                background={`url(${props.item.pic})`}
+                background={`url(${image})`}
             >
             </SubCatIcon>
             {props.item.name}

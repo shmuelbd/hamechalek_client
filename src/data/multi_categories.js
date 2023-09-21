@@ -92,6 +92,96 @@ const multi_categories = [
         pic: "disinfection",
         id: 3
     },
+    {
+        name: "מחברות ודפדפות",
+        pic: "notebook",
+        id: 4
+    },
+    {
+        name: "עטים ועפרונות",
+        pic: "stationery",
+        id: 4
+    },
+    {
+        name: "נייר צילום",
+        pic: "paper",
+        id: 4
+    },
+    {
+        name: "כלי משרד",
+        pic: "officeTools",
+        id: 4
+    },
+    {
+        name: "קלסרים וניילוניות",
+        pic: "binder",
+        id: 4
+    },
+    {
+        name: "טישו לשבת",
+        pic: "tissue",
+        id: 5
+    },
+    {
+        name: "נייר טואלט",
+        pic: "toiletpaper",
+        id: 5
+    },
+    {
+        name: "מפיות שולחן",
+        pic: "tablenapkins",
+        id: 5
+    },
+    {
+        name: "נייר מגבת",
+        pic: "papertowel",
+        id: 5
+    },
+    {
+        name: "טיטולים",
+        pic: "diapers",
+        id: 6
+    },
+    {
+        name: "היגיינה",
+        pic: "hygiene",
+        id: 6
+    },
+    {
+        name: "שמפו ומרכך",
+        pic: "shampoo",
+        id: 6
+    },
+    {
+        name: "אביזרי רחצה",
+        pic: "bathroom",
+        id: 6
+    },
+    {
+        name: "מזון לתינוקות",
+        pic: "babyfood",
+        id: 6
+    },
+    {
+        name: "קוסמטיקה",
+        pic: "cosmetics",
+        id: 6
+    },
+    {
+        name: "נורות",
+        pic: "lightbulbs",
+        id: 7
+    },
+    {
+        name: "נרות ואביזרי הדלקה",
+        pic: "candles",
+        id: 7
+    },
+    {
+        name: "אביזרים שונים לבית",
+        pic: "pots",
+        id: 7
+    },
 
 
 

@@ -18,6 +18,24 @@ import main_clean from "./images/main_clean.jpg"
 import laundry_detergents from "./images/laundry_detergents.jpg"
 import broom from "./images/broom.jpg"
 import disinfection from "./images/disinfection.jpg"
+import stationery from "./images/stationery.jpg"
+import notebook from "./images/notebook.jpg"
+import paper from "./images/paper.jpg"
+import officeTools from "./images/officeTools.jpg"
+import binder from "./images/binder.jpg"
+import tissue from "./images/tissue.jpg"
+import toiletpaper from "./images/toiletpaper.jpg"
+import tablenapkins from "./images/tablenapkins.jpg"
+import papertowel from "./images/papertowel.jpg"
+import diapers from "./images/diapers.jpg"
+import hygiene from "./images/hygiene.jpg"
+import shampoo from "./images/shampoo.jpg"
+import bathroom from "./images/bathroom.jpg"
+import babyfood from "./images/babyfood.jpg"
+import cosmetics from "./images/cosmetics.jpg"
+import pots from "./images/pots.jpg"
+import candles from "./images/candles.jpg"
+import lightbulbs from "./images/lightbulbs.jpg"
 
 const SubCatItem = styled.div`
 width: 100px;
@@ -27,6 +45,7 @@ flex-wrap: wrap;
 align-items: stretch;
 justify-content: center;
 text-align: center;
+font-size: 18px;
 `;
 const SubCatIcon = styled.div<{ background: string }>`
 min-width: 100px;
@@ -103,6 +122,60 @@ const SubCategory = (props: Props) => {
             break;
         case "disinfection":
             image = disinfection;
+            break;
+        case "stationery":
+            image = stationery;
+            break;
+        case "notebook":
+            image = notebook;
+            break;
+        case "paper":
+            image = paper;
+            break;
+        case "officeTools":
+            image = officeTools;
+            break;
+        case "binder":
+            image = binder;
+            break;
+        case "tissue":
+            image = tissue;
+            break;
+        case "toiletpaper":
+            image = toiletpaper;
+            break;
+        case "tablenapkins":
+            image = tablenapkins;
+            break;
+        case "papertowel":
+            image = papertowel;
+            break;
+        case "diapers":
+            image = diapers;
+            break;
+        case "hygiene":
+            image = hygiene;
+            break;
+        case "shampoo":
+            image = shampoo;
+            break;
+        case "bathroom":
+            image = bathroom;
+            break;
+        case "babyfood":
+            image = babyfood;
+            break;
+        case "cosmetics":
+            image = cosmetics;
+            break;
+        case "pots":
+            image = pots;
+            break;
+        case "candles":
+            image = candles;
+            break;
+        case "lightbulbs":
+            image = lightbulbs;
             break;
         default:
             break;

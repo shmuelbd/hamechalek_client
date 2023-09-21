@@ -48,8 +48,8 @@ border: 1px solid #7F5AFF ;
 `;
 const Title = styled.div`
 width: 100%;
-font-size: 25px;
-font-weight: 200;
+font-size: 35px;
+font-weight: 500;
 color: #7F5AFF;
 `;
 const SubCatBox = styled.div`

@@ -49,12 +49,12 @@ const multi_categories = [
     },
     {
         name: "תבניות אלומיניום",
-        pic: "Aluminum molds",
+        pic: "Aluminum_molds",
         id: 2
     },
     {
         name: "נייר כסף",
-        pic: "Aluminum foil",
+        pic: "Aluminum_foil",
         id: 2
     },
     {

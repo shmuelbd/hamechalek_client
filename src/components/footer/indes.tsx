@@ -8,7 +8,7 @@ height: 75px;
 background-color: #ffffff;
 -webkit-box-shadow: 0px 8px 23px 9px rgba(0,0,0,0.2); 
 box-shadow: 0px 8px 23px 9px rgba(0,0,0,0.2);
-position: sticky;
+position: fixed;
 z-index: 100;
 bottom: 0;
 left: 0;

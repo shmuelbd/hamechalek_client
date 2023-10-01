@@ -3,6 +3,7 @@ import Layout from "./Layout"
 import Categories from "./Categories"
 import Home from "../components/home"
 import ScrollToTop from "../functions/ScrollToTop"
+import Items from "./Items"
 
 
 
@@ -13,10 +14,11 @@ const Router = () => {
             <Routes>
                 <Route path="/" element={<Layout />} >
                     <Route path="/" element={<Home />} />
-                    <Route path="/categories" element={<Categories />} />
-                    <Route path="/profile" element={<Home />} />
-                    <Route path="/sale" element={<Home />} />
-                    <Route path="/cart" element={<Home />} />
+                    <Route path="categories" element={<Categories />} />
+                    <Route path="profile" element={<Home />} />
+                    <Route path="sale" element={<Home />} />
+                    <Route path="cart" element={<Home />} />
+                    <Route path="items/:catid" element={<Items />} />
                 </Route>
                 {/* <Route path="/login" element={<Login />} /> */}
             </Routes>

@@ -19,7 +19,7 @@ const multi_categories = [
     },
     {
         name: "ריבות דבש וממרחים",
-        pic: "jam",
+        pic: "spread",
         id: 1
     },
     {

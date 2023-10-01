@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 
 const SubCatItem = styled.div`
@@ -17,9 +18,21 @@ min-width: 100px;
 height: 100px;
 border-radius: 50%;
 src: ${(props) => props.src} ;
-background-size: contain;
-background-position: center;
-background-repeat: no-repeat;
+
+
+`;
+
+const LinkItem = styled(NavLink)`
+
+font-size: 18px;
+text-decoration: none;
+cursor: pointer;
+user-select: none;
+-webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  -webkit-tap-highlight-color: transparent;
+
 `;
 
 
@@ -33,14 +46,17 @@ type Props = {
 const SubCategory = (props: Props) => {
 
     return (
-        <SubCatItem>
+        <LinkItem to={`/items/${props.item.id}`}>
+            <SubCatItem>
 
-            <SubCatIcon key={props.index}
-                src={`https://xn--8dbgpg1c.xn--4dbrk0ce/images/${props.item.pic}.jpg`}
-            >
-            </SubCatIcon>
-            {props.item.name}
-        </SubCatItem>
+
+                <SubCatIcon key={props.index} loading="lazy"
+                    src={`https://xn--8dbgpg1c.xn--4dbrk0ce/images/${props.item.pic}.jpg`}
+                >
+                </SubCatIcon>
+                {props.item.name}
+            </SubCatItem>
+        </LinkItem>
     )
 }
 

@@ -1,13 +1,9 @@
 
 import axios from 'axios';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { userDetails } from '../states/userDetails';
 
 
 
 export const GetDetails = async () => {
-
-    // const [data, setData] = useRecoilState(userDetails);
 
 
     try {

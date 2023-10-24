@@ -5,6 +5,7 @@ import itemsLocal from '../../data/items';
 import { GetItems } from '../../functions/getItems';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Proccesing from './Proccesing';
 
 
 const Container = styled.div`
@@ -30,10 +31,6 @@ const Items = (props: Props) => {
     const [items, setItems] = useState<ItemsType | any>(null)
     let { catid } = useParams();
 
-
-
-
-
     useEffect(() => {
         axios.post('http://localhost:3000/web-shop/items', {
             "item_group_id": catid
@@ -49,12 +46,13 @@ const Items = (props: Props) => {
     return (
         <Container>
             {
-                items === null ? "null" :
+                items === null ? <Proccesing /> :
                     items.map((item: any, index: Number) => (
                         <Item item={item} key={`${index}`} />
 
                     ))
             }
+
         </Container>
     )
 }

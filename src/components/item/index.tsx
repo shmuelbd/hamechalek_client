@@ -9,7 +9,7 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 width: 44%;
-height: 250px;
+/* height: 250px; */
 margin: 3%;
 padding-top: 5px;
 background-color: #fff1f0;
@@ -19,7 +19,7 @@ border-radius: 10px;
 `;
 const Img = styled(motion.img)`
 width: 90%;
-height: 70%;
+height: 150px;
 background-color: #249e9e;
 `;
 const ItemName = styled(motion.div)`
@@ -30,6 +30,9 @@ font-size: 15px;
 color: #1d1d1d;
 `;
 const ItemPrice = styled(motion.div)`
+display: flex;
+justify-content: flex-end;
+align-items: flex-end;
 width: 90%;
 height: 15%;
 font-size: 20px;
@@ -37,97 +40,46 @@ font-weight: 800;
 color: #1d1d1d;
 text-align: left;
 `;
-const PopUpContainer = styled(motion.div)`
-width: 100%;
-height: 100%;
-background-color: #8f8f8f57;
-bottom: 0;
-position: fixed;
-left: 0;
-z-index: 101;
+const Price_first = styled(motion.div)`
+font-size: 30px;
+font-weight: 900;
+padding: 0 1px;
+margin-bottom: -3px;
+font-family: 'Rubik', sans-serif;
 `;
-const PopUpItem = styled(motion.div)`
-width: 100%;
-height: 70%;
-background-color: #ffffff;
-bottom: 0;
-position: fixed;
-left: 0;
-border-radius: 12px 12px 0 0;
+const Price_second = styled(motion.div)`
+font-size: 20px;
+font-weight: 400;
 `;
-
 
 
 type Props = { item: any }
 
 const Item = (props: Props) => {
-    const [open, setopen] = useState(false)
 
+    const price = props.item.sale_nis;
+    const price_first = price.split(".")[0];
+    const price_second = price.split(".")[1];
     return (
 
-        <Container to={`${props.item.id}`}
-        // onClick={() => setopen(state => !state)}
+        <Container to={`/item/${props.item.item_id}`}
         >
             <Img />
-
             <ItemName>
                 {props.item.item_name}
             </ItemName>
             <ItemPrice>
-                {props.item.sale_nis} ₪
+                <Price_second>
+                    {price_second}.
+                </Price_second>
+                <Price_first>
+                    {price_first}
+                </Price_first>
+                ₪
             </ItemPrice>
-
-
-            {/* {open && <PopUp />} */}
         </Container>
 
     )
 }
 
 export default Item
-
-
-const PopUp = (props: Props) => {
-
-    return (
-
-        <PopUpContainer
-            initial={{
-                opacity: 0,
-                // y: +1000
-
-            }}
-            animate={{
-                opacity: 1,
-                y: 0,
-            }}
-            transition={{
-                // delay: (0.15 / 30)
-                duration: 0.3,
-
-            }}
-        >
-
-            <PopUpItem
-                onClick={(e) => e.stopPropagation()}
-
-                initial={{
-                    opacity: 0,
-                    y: +1000
-
-                }}
-                animate={{
-                    opacity: 1,
-                    y: 0,
-                }}
-                transition={{
-                    // delay: (0.15 / 30)
-                    duration: 0.2,
-
-                }}
-            >
-
-            </PopUpItem>
-        </PopUpContainer>
-    )
-}

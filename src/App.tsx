@@ -1,7 +1,6 @@
 import 'material-symbols';
-import { userDetails } from './states/userDetails';
-
 import Router from './pages/Router';
+import { ProgressBar } from 'primereact/progressbar';
 
 
 type Props = {}

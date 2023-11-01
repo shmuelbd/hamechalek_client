@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Proccesing from './Proccesing';
 import ItemDetails from './ItemDetails';
+import { GET_ITEM } from '../../env';
 
 const Container = styled(motion.div)`
 display: flex;
@@ -95,7 +96,7 @@ const OneItem = () => {
     const price_second = price?.split(".")[1];
 
     useEffect(() => {
-        axios.post('http://localhost:3000/web-shop/item', {
+        axios.post(GET_ITEM, {
             "item_id": itemid
         }).then((res) => {
             setItem(res.data);

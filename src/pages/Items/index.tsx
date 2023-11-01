@@ -6,6 +6,7 @@ import { GetItems } from '../../functions/getItems';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import Proccesing from './Proccesing';
+import { GET_ITEMS } from '../../env';
 
 
 const Container = styled.div`
@@ -32,7 +33,7 @@ const Items = (props: Props) => {
     let { catid } = useParams();
 
     useEffect(() => {
-        axios.post('http://localhost:3000/web-shop/items', {
+        axios.post("https://apiservice.xn--8dbgpg1c.xn--4dbrk0ce/web-shop/items", {
             "item_group_id": catid
         }).then((res) => {
             setItems(res.data);

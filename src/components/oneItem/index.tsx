@@ -5,7 +5,8 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Proccesing from './Proccesing';
 import ItemDetails from './ItemDetails';
-import { GET_ITEM } from '../../env';
+import { GET_ITEM, GET_ITEMS } from '../../env';
+import { itemsCategoryState } from '../../store/items';
 
 const Container = styled(motion.div)`
 display: flex;
@@ -88,22 +89,34 @@ type ItemType = {
 }
 
 const OneItem = () => {
-    const [item, setItem] = useState<ItemType | null>(null)
-    let { itemid } = useParams();
+    const [item, setItem] = useState<any>()
+    const [procces, setProcces] = useState<Boolean>(true)
+    console.log("item", item);
+
+    let { itemid, catid } = useParams();
 
     const price = item?.sale_nis;
     const price_first = price?.split(".")[0];
     const price_second = price?.split(".")[1];
 
     useEffect(() => {
-        axios.post(GET_ITEM, {
-            "item_id": itemid
-        }).then((res) => {
-            setItem(res.data);
-            console.log(res.data);
-        }).catch((err) => {
-            console.log(err);
-        })
+        if (itemsCategoryState.value.length < 1 || itemsCategoryState.value.filter((val: any) => val.item_id == itemid).length < 1) {
+
+            axios.post(GET_ITEMS, {
+                "item_group_id": catid
+            }).then((res) => {
+                itemsCategoryState.value = res.data;
+                console.log("itemsCategoryState: ", itemsCategoryState.value);
+                setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
+                setProcces(false);
+            }).catch((err) => {
+                console.log(err);
+            })
+
+        } else {
+            setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
+            setProcces(false);
+        }
 
     }, [])
 
@@ -111,7 +124,7 @@ const OneItem = () => {
         <Container>
             {/* <Img /> */}
             {
-                item === null ? <Proccesing /> :
+                procces ? <Proccesing /> :
                     // <Item item={item} key={`${index}`} />
                     <>
                         <DivImage>

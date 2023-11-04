@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
 import { motion } from "framer-motion"
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 
 const Container = styled(NavLink)`
@@ -53,16 +53,23 @@ font-weight: 400;
 `;
 
 
-type Props = { item: any }
+type Props = {
+    item: any,
+    // setPopUp: React.Dispatch<React.SetStateAction<any>> 
+}
 
 const Item = (props: Props) => {
 
     const price = props.item.sale_nis;
     const price_first = price.split(".")[0];
     const price_second = price.split(".")[1];
+    let { catid } = useParams();
+
     return (
 
-        <Container to={`/item/${props.item.item_id}`}
+        <Container
+            to={`/item/${catid}/${props.item.item_id}`}
+        // onClick={() => props.setPopUp(true)}
         >
             <Img />
             <ItemName>

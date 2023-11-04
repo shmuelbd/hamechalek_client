@@ -22,13 +22,11 @@ type UserDataType = {
 type Props = {}
 
 const Layout = (props: Props) => {
-    const [userData, setUserData] = useState<UserDataType>()
-    const [cart, setCart] = useState()
 
     return (
         <Container>
             <Header />
-            <Outlet context={[userData, setUserData, cart, setCart]} />
+            <Outlet />
             <Footer />
         </Container>
     )

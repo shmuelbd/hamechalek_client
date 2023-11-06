@@ -89,7 +89,7 @@ type ItemType = {
 }
 
 const OneItem = () => {
-    const [item, setItem] = useState<any>()
+    const [item, setItem] = useState<ItemType | any>()
     const [procces, setProcces] = useState<Boolean>(true)
     console.log("item", item);
 
@@ -161,8 +161,3 @@ const OneItem = () => {
 
 export default OneItem
 
-// item_extended_description
-// item_group_id
-// item_name
-// picture_link
-// sale_nis

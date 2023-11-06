@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { motion } from "framer-motion"
+import { ItemType } from '../../../types/item';
 
 
 const Container = styled(motion.div)`
@@ -32,30 +33,41 @@ color: #ffffff;
 type Props = {
     item: ItemType
 }
-type ItemType = {
-    item_group_id: String,
-    item_name: String,
-    picture_link: String,
-    item_extended_description: String,
-    sale_nis: String
-}
+
 
 const ItemDetails = (props: Props) => {
     return (
         <Container>
-
-            <Box background="#109e03">
-                <span className="material-symbols-rounded">check_circle</span>
-                <p>המוצר במלאי</p>
-            </Box>
-            <Box background="#98a111">
-                <span className="material-symbols-rounded">package_2</span>
-                <p>12 במארז</p>
-            </Box>
-            <Box background="#df3838">
-                <span className="material-symbols-rounded">sell</span>
-                <p>3 במבצע</p>
-            </Box>
+            {
+                props.item.in_stock ?
+                    <Box background="#109e03">
+                        <span className="material-symbols-rounded">check_circle</span>
+                        <p>המוצר במלאי</p>
+                    </Box>
+                    :
+                    <Box background="#ff2e2e">
+                        <span className="material-symbols-rounded">cancel</span>
+                        <p>חסר במלאי</p>
+                    </Box>
+            }
+            {
+                props.item.inPackage ?
+                    <Box background="#0b6bb9">
+                        <span className="material-symbols-rounded">package_2</span>
+                        <p>{props.item.inPackage} במארז</p>
+                    </Box>
+                    :
+                    null
+            }
+            {
+                props.item.inPackage ?
+                    <Box background="#facf0f">
+                        <span className="material-symbols-rounded">sell</span>
+                        <p>3 במבצע</p>
+                    </Box>
+                    :
+                    null
+            }
 
         </Container>
     )

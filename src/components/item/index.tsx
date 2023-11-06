@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components';
 import { motion } from "framer-motion"
 import { NavLink, useParams } from 'react-router-dom';
+import { ItemType } from '../../types/item';
 
 
 const Container = styled(NavLink)`
@@ -54,7 +55,7 @@ font-weight: 400;
 
 
 type Props = {
-    item: any,
+    item: ItemType,
     // setPopUp: React.Dispatch<React.SetStateAction<any>> 
 }
 

@@ -5,6 +5,7 @@ import Home from "../components/home"
 import ScrollToTop from "../functions/ScrollToTop"
 import Items from "./Items"
 import OneItem from "../components/oneItem"
+import Account from "./Account"
 
 
 const Router = () => {
@@ -20,6 +21,7 @@ const Router = () => {
                     <Route path="cart" element={<Home />} />
                     <Route path="items/:catid" element={<Items />} />
                     <Route path="item/:catid/:itemid" element={<OneItem />} />
+                    <Route path="myaccount" element={<Account />} />
                 </Route>
                 {/* <Route path="/login" element={<Login />} /> */}
             </Routes>

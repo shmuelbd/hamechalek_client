@@ -15,7 +15,7 @@ padding-top: 5px;
 /* background-color: #9b1d14; */
 user-select: none;
 text-decoration: none;
-border-radius: 10px;
+border-radius: 20px;
 `;
 const Price = styled.div`
 width: 100%;
@@ -29,7 +29,7 @@ height: ${(props) => props.height};
 
 type Props = {}
 
-const Proccesing = (props: Props) => {
+export const Proccesing = (props: Props) => {
     return (
         <Container>
             <Skeleton width="100%" height="350px"></Skeleton>
@@ -59,4 +59,12 @@ const Proccesing = (props: Props) => {
     )
 }
 
-export default Proccesing
+export const ImageProccesing = (props: Props) => {
+    return (
+        <Container>
+            <Skeleton width="100%" height="350px"></Skeleton>
+
+        </Container>
+    )
+}
+

@@ -58,7 +58,7 @@ const menuItems = [
     {
         name: "profile",
         icon: "person",
-        link: "profile"
+        link: "myaccount"
     },
     {
         name: "sale",

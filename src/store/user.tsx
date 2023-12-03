@@ -1,5 +1,5 @@
 import { signal } from "@preact/signals";
 
-export const userDetails = signal({ name: "jjj" });
+export const userDetails = signal({ customer_id: 5238 });
 
 

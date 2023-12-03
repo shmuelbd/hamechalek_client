@@ -5,4 +5,5 @@ const url_api = "http://localhost:3000/"
 
 export const GET_ITEMS = url_api + "web-shop/items";
 export const GET_ITEM = url_api + "web-shop/item";
-export const GET_ORDERS = url_api + "web-shop/item";
+export const GET_ORDERS = url_api + "web-shop/user/documents/list";
+

@@ -1,9 +1,7 @@
-import React from 'react'
-import LastOrders from './LastOrders'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
 
 const Container = styled(motion.div)`
 display: flex;
@@ -45,12 +43,16 @@ color: #3a3a3a;
 type Props = {}
 
 const Account = (props: Props) => {
+
+
+
     return (
         <Container>
             <Title>הפרופיל שלי</Title>
             <Item to={"lastorders"}>
                 הזמנות אחרונות
                 <span className="material-symbols-rounded">receipt</span>
+
             </Item>
             <Item to={"lastorders"}>
                 הפרטים שלי

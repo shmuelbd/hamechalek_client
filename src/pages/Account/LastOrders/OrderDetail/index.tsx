@@ -10,14 +10,32 @@ const Container = styled.div`
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
-width: 44%;
-/* height: 250px; */
-margin: 3%;
-padding-top: 5px;
-background-color: #fff1f0;
+width: 100%;
 user-select: none;
 text-decoration: none;
-border-radius: 10px;
+
+
+`;
+const Content = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: flex-start;
+align-content: flex-start;
+width: 90%;
+background-color: #fafafa;
+user-select: none;
+text-decoration: none;
+border-right: 2px dashed #5a5a5a;
+border-left: 2px dashed #5a5a5a;
+height: 100vh;
+padding-top: 15px;
+`;
+const P = styled.div`
+width: 100%;
+height: min-content;
+text-align: center;
+font-size: 15px;
 `;
 
 type Props = {}
@@ -40,7 +58,7 @@ const OrderDetail = (props: Props) => {
         }).then((res) => {
 
             setProcces(false);
-            setOrder(res.data.data.document_list)
+            setOrder(res.data)
         }).catch((err) => {
             console.log(err);
         })
@@ -52,17 +70,32 @@ const OrderDetail = (props: Props) => {
         <>
             {
                 procces ? <Proccesing /> :
+                    <Container>
+                        <Content>
+                            <P>{order.document_type}</P>
+                            <P> {order.document_number}</P>
+                            <P> {order.document_date}</P>
+                            <P> {order.documnet_time}</P>
+                            <P> {order.customer_name}</P>
+                            <P> {order.customer_address}</P>
+                            <P> {order.customer_city}</P>
+                            <P> {order.customer_phone}</P>
+                            <P>________________________</P>
+                            <P></P>
+                            <P></P>
+                            <P></P>
 
-                    // <Item>
-                    //     <P>הזמנות אחרונות</P>
+                        </Content>
+                    </Container>
+                // <Item>
+                //     <P>הזמנות אחרונות</P>
 
-                    //     {
-                    //         orders.map((item: any, index: number) => (
-                    //             <OrderItem item={item} key={index} />
-                    //         ))
-                    //     }
-                    // </Item>
-                    1223
+                //     {
+                //         orders.map((item: any, index: number) => (
+                //             <OrderItem item={item} key={index} />
+                //         ))
+                //     }
+                // </Item>
                 // <Container>OrderDetail</Container>
             }
         </>

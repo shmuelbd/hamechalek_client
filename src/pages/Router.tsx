@@ -7,6 +7,7 @@ import Items from "./Items"
 import OneItem from "../components/oneItem"
 import Account from "./Account"
 import LastOrders from "./Account/LastOrders"
+import OrderDetail from "./Account/LastOrders/OrderDetail"
 
 
 const Router = () => {
@@ -24,12 +25,15 @@ const Router = () => {
                     <Route path="item/:catid/:itemid" element={<OneItem />} />
                     <Route path="myaccount">
                         <Route index element={<Account />} />
-                        <Route path="lastorders" element={<LastOrders />} />
+                        <Route path="lastorders"  >
+                            <Route index element={<LastOrders />} />
+                            <Route path=":docid/:typeid" element={<OrderDetail />} />
+                        </Route>
                     </Route>
                 </Route>
                 {/* <Route path="/login" element={<Login />} /> */}
             </Routes>
-        </BrowserRouter>
+        </BrowserRouter >
     )
 }
 

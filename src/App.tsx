@@ -1,6 +1,7 @@
 import 'material-symbols';
 import Router from './pages/Router';
 
+
 type Props = {}
 
 const App = (props: Props) => {

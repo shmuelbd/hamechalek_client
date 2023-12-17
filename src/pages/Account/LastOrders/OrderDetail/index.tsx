@@ -131,7 +131,6 @@ const OrderDetail = (props: Props) => {
                                     </Table>
                                 ))
                             }
-                            <P> {order.receipt_total}</P>
                             {/* <P> {order.documentLink}</P> */}
                             <P></P>
                             <P></P>

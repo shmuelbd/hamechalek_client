@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { InputText } from 'primereact/inputtext';
+import { Button } from 'primereact/button';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { GET_TOKEN_SIGNIN } from '../../../env';
+import { userDetails } from '../../../store/user';
 
 const Container = styled(motion.div)`
 display: flex;
@@ -22,12 +26,43 @@ height: 80px;
 type Props = {}
 
 const Login = (props: Props) => {
+    const [loading, setLoading] = useState<any>({ email: "" });
+
+
+
+    const load = async () => {
+
+        await axios.post(GET_TOKEN_SIGNIN, {
+
+            "email": loading.email,
+            "password": loading.password
+
+        }).then((res) => {
+            setLoading(false);
+            console.log(res);
+            const token = { token: res.data.token, first_name: res.data.first_name }
+            userDetails.value = token;
+
+        }).catch((err) => {
+            console.log(err);
+        })
+
+        console.log(loading);
+
+
+
+
+    };
+
+
     return (
         <Container>
             <Title>כניסה</Title>
-
-            <InputText placeholder="אימייל" type='email' />
-            <InputText placeholder="סיסמה" type='password' />
+            <InputText placeholder="אימייל" type='email' style={{ width: '100%' }} onChange={(e) => setLoading((state: any) => ({ ...state, email: e.target.value }))} />
+            <InputText placeholder="סיסמה" type='password' style={{ width: '100%' }} onChange={(e) => setLoading((state: any) => ({ ...state, password: e.target.value }))} />
+            <div className="card flex flex-wrap justify-content-center gap-3">
+                <Button label="כניסה" icon="pi pi-check" onClick={load} />
+            </div>
         </Container>
     )
 }

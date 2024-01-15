@@ -86,13 +86,13 @@ const OrderDetail = (props: Props) => {
     const [procces, setProcces] = useState<Boolean>(true)
     const [order, setOrder] = useState<any>(false)
 
-    const customer_id = userDetails.value.customer_id;
+    const customer_id = userDetails.value.token;
 
 
     useEffect(() => {
 
         axios.post(GET_ORDER_DETAILS, {
-            "customer_id": customer_id,
+            "token": customer_id,
             "document_number": docid,
             "document_type": typeid
         }).then((res) => {

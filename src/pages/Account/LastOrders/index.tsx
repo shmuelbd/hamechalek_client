@@ -29,13 +29,13 @@ const LastOrders = (props: Props) => {
     const [procces, setProcces] = useState<Boolean>(true)
     const [orders, setOrders] = useState<any>(false)
 
-    const customer_id = userDetails.value.customer_id;
+    const customer_id = userDetails.value.token;
 
 
     useEffect(() => {
 
         axios.post(GET_ORDERS, {
-            "customer_id": customer_id
+            "token": customer_id
         }).then((res) => {
 
             setProcces(false);

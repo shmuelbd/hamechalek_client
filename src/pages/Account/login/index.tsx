@@ -4,8 +4,9 @@ import { Button } from 'primereact/button';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import axios from 'axios';
-import { GET_TOKEN_SIGNIN } from '../../../env';
+import { GET_TOKEN_LOGIN } from '../../../env';
 import { userDetails } from '../../../store/user';
+import { useNavigate } from "react-router-dom";
 
 const Container = styled(motion.div)`
 display: flex;
@@ -27,12 +28,13 @@ type Props = {}
 
 const Login = (props: Props) => {
     const [loading, setLoading] = useState<any>({ email: "" });
+    const navigate = useNavigate();
 
 
 
     const load = async () => {
 
-        await axios.post(GET_TOKEN_SIGNIN, {
+        await axios.post(GET_TOKEN_LOGIN, {
 
             "email": loading.email,
             "password": loading.password
@@ -42,15 +44,13 @@ const Login = (props: Props) => {
             console.log(res);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
+            navigate("/myaccount");
 
         }).catch((err) => {
             console.log(err);
         })
 
         console.log(loading);
-
-
-
 
     };
 

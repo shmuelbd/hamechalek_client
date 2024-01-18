@@ -7,5 +7,5 @@ export const GET_ITEMS = url_api + "web-shop/items";
 export const GET_ITEM = url_api + "web-shop/item";
 export const GET_ORDERS = url_api + "web-shop/user/documents/list";
 export const GET_ORDER_DETAILS = url_api + "web-shop/user/documents/details";
-export const GET_TOKEN_SIGNIN = url_api + "web-shop/user/auth/signIn";
+export const GET_TOKEN_LOGIN = url_api + "auth/signIn";
 

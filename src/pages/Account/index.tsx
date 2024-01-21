@@ -48,6 +48,7 @@ const Account = (props: Props) => {
 
 
 
+
     return (
         <Container>
             <Title>הפרופיל שלי</Title>
@@ -67,13 +68,13 @@ const Account = (props: Props) => {
                             כרטיסי אשראי
                             <span className="material-symbols-rounded">credit_card</span>
                         </Item>
-                        <Item to={"lastorders"}>
+                        <Item to={"/"} onClick={() => userDetails.value = { token: false, first_name: 0 }}>
                             יציאה
                             <span className="material-symbols-rounded">logout</span>
                         </Item>
                     </>
                     :
-                    <Item to={"login"}>
+                    <Item to={"login"} >
                         כניסה / הרשמה
                         <span className="material-symbols-rounded">login</span>
                     </Item>

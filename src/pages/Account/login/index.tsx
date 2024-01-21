@@ -30,18 +30,15 @@ const Login = (props: Props) => {
     const [loading, setLoading] = useState<any>({ email: "" });
     const navigate = useNavigate();
 
-
-
     const load = async () => {
 
-        await axios.post(GET_TOKEN_LOGIN, {
+        axios.post(GET_TOKEN_LOGIN, {
 
             "email": loading.email,
             "password": loading.password
 
         }).then((res) => {
             setLoading(false);
-            console.log(res);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
             localStorage.setItem("cart", JSON.stringify(token))

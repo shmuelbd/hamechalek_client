@@ -46,7 +46,10 @@ type Props = {}
 const Account = (props: Props) => {
     const token = userDetails.value.token;
 
-
+    const exit = () => {
+        userDetails.value = { token: false, first_name: 0 };
+        localStorage.clear();
+    }
 
 
     return (
@@ -68,7 +71,7 @@ const Account = (props: Props) => {
                             כרטיסי אשראי
                             <span className="material-symbols-rounded">credit_card</span>
                         </Item>
-                        <Item to={"/"} onClick={() => userDetails.value = { token: false, first_name: 0 }}>
+                        <Item to={"/"} onClick={() => exit()}>
                             יציאה
                             <span className="material-symbols-rounded">logout</span>
                         </Item>

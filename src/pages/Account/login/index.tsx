@@ -41,7 +41,7 @@ const Login = (props: Props) => {
             setLoading(false);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
-            localStorage.setItem("cart", JSON.stringify(token))
+            localStorage.setItem("user", JSON.stringify(token))
             navigate("/myaccount");
 
         }).catch((err) => {

@@ -11,15 +11,15 @@ type Props = {}
 const App = (props: Props) => {
 
   useEffect(() => {
-    if (localStorage.getItem("cart")) {
-      const tokenjson = JSON.parse(localStorage.getItem("cart") || "");
+    if (localStorage.getItem("user")) {
+      const tokenjson = JSON.parse(localStorage.getItem("user") || "");
 
       axios.post(GET_TOKEN_VERIFY, {
         "token": tokenjson.token
       }).then((res) => {
         const token = { token: res.data.token, first_name: res.data.first_name }
         userDetails.value = token;
-        localStorage.setItem("cart", JSON.stringify(token))
+        localStorage.setItem("user", JSON.stringify(token))
       }).catch((err) => {
         console.log(err);
       })

@@ -1,6 +1,10 @@
 import { signal } from "@preact/signals";
 
-export const userDetails = signal({ token: false, first_name: 5238 });
+
+
+const userData = JSON.parse(localStorage.getItem("user") || "");
+
+export const userDetails = signal(userData);
 
 
 // const getCart = localStorage.getItem("cart") ?? "[]";

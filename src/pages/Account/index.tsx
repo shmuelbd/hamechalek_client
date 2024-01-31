@@ -63,7 +63,7 @@ const Account = (props: Props) => {
                             <span className="material-symbols-rounded">receipt</span>
 
                         </Item>
-                        <Item to={"lastorders"}>
+                        <Item to={"MyDetails"}>
                             הפרטים שלי
                             <span className="material-symbols-rounded">manage_accounts</span>
                         </Item>

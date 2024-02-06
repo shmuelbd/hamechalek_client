@@ -9,4 +9,5 @@ export const GET_ORDERS = url_api + "web-shop/user/documents/list";
 export const GET_ORDER_DETAILS = url_api + "web-shop/user/documents/details";
 export const GET_TOKEN_LOGIN = url_api + "auth/signIn";
 export const GET_TOKEN_VERIFY = url_api + "auth/verifyToken";
+export const GET_USER_DETAILS = url_api + "web-shop/user/details";
 

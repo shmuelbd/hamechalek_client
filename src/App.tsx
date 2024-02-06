@@ -11,7 +11,7 @@ type Props = {}
 const App = (props: Props) => {
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (localStorage.getItem("user") != null) {
       const tokenjson = JSON.parse(localStorage.getItem("user") || "");
 
       axios.post(GET_TOKEN_VERIFY, {

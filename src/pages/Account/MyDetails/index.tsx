@@ -6,6 +6,9 @@ import { ProgressBar } from 'primereact/progressbar';
 import { InputText } from 'primereact/inputtext';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { Botton } from '../../../components/global-components/buttons/buttons';
+import { BoxFiled } from '../../../components/global-components/inputs/inputs';
+import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
 
 type Props = {}
 
@@ -30,7 +33,7 @@ const MyDetails = (props: Props) => {
         <div>
             {
                 userData == undefined ?
-                    <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
+                    <ProgressBarCustom />
                     :
                     <UserDetails userData={userData} />
             }
@@ -56,14 +59,6 @@ margin-top: 10px;
 /* background-color: #f5f5f5; */
 justify-content: center;
 `;
-const BoxFiled = styled(motion.div)`
-width: 95%;
-min-height: 100px;
-margin: 10px 0;
-&& label {
-font-weight: 900;
-}
-`;
 
 const ContainerUserDetailsNotEdit = styled(motion.div)`
 display: flex;
@@ -86,22 +81,7 @@ const P = styled(motion.div)`
 font-weight: 900;
 margin-left:5px ;
 `;
-const Botton = styled(motion.div)`
-width: 90%;
-background-color: #7F5AFF;
-height: 50px;
-color: white;
-font-size: 20px;
-margin: 5px 20px;
-margin-top: 20px;
-border-radius: 12px;
-display: flex;
-align-items: center;
-justify-content: center;
-&& span {
-    margin: 0 5px;
-}
-`;
+
 
 
 

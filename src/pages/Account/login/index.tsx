@@ -7,12 +7,15 @@ import axios from 'axios';
 import { GET_TOKEN_LOGIN } from '../../../env';
 import { userDetails } from '../../../store/user';
 import { useNavigate } from "react-router-dom";
+import { Botton } from '../../../components/global-components/buttons/buttons';
+import { BoxFiled } from '../../../components/global-components/inputs/inputs';
+import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
 
 const Container = styled(motion.div)`
 display: flex;
 flex-wrap: wrap;
+justify-content: center;
 width: 100%;
-padding: 5px;
 margin-top: 10px;
 `;
 
@@ -24,20 +27,24 @@ text-align: center;
 height: 80px;
 `;
 
+
+
 type Props = {}
 
 const Login = (props: Props) => {
     const [loading, setLoading] = useState<any>({ email: "" });
+    const [ProgressBar, setProgressBar] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const load = async () => {
-
+        setProgressBar(true)
         axios.post(GET_TOKEN_LOGIN, {
 
             "email": loading.email,
             "password": loading.password
 
         }).then((res) => {
+            setProgressBar(false)
             setLoading(false);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
@@ -46,22 +53,52 @@ const Login = (props: Props) => {
 
         }).catch((err) => {
             console.log(err);
+            setProgressBar(false)
         })
 
-        console.log(loading);
-
     };
-
+    const styleBox = {
+        width: '100%',
+        color: 'black',
+        border: 'none',
+        backgroundColor: "#f3f3f3ca",
+    }
 
     return (
-        <Container>
-            <Title>כניסה</Title>
-            <InputText placeholder="אימייל" type='email' style={{ width: '100%' }} onChange={(e) => setLoading((state: any) => ({ ...state, email: e.target.value }))} />
-            <InputText placeholder="סיסמה" type='password' style={{ width: '100%' }} onChange={(e) => setLoading((state: any) => ({ ...state, password: e.target.value }))} />
-            <div className="card flex flex-wrap justify-content-center gap-3">
-                <Button label="כניסה" icon="pi pi-check" onClick={load} />
-            </div>
-        </Container>
+        <>
+            {ProgressBar ? <ProgressBarCustom /> : null}
+            <Container>
+                <Title>כניסה</Title>
+                <BoxFiled>
+                    <label htmlFor="first_name">אימייל</label>
+                    <InputText id="first_name"
+                        type='email'
+                        aria-describedby="first_name-help"
+                        style={styleBox}
+                        onChange={(e) => setLoading((state: any) => ({ ...state, email: e.target.value }))} />
+                    {/* <small id="first_name-help">
+                                מקסימום 20 תווים
+                            </small> */}
+                </BoxFiled>
+                <BoxFiled>
+                    <label htmlFor="first_name">סיסמה</label>
+                    <InputText id="first_name"
+                        type='password'
+                        aria-describedby="first_name-help"
+                        style={styleBox}
+                        onChange={(e) => setLoading((state: any) => ({ ...state, password: e.target.value }))} />
+                    {/* <small id="first_name-help">
+                                מקסימום 20 תווים
+                            </small> */}
+                </BoxFiled>
+
+                <Botton onClick={load}>
+                    כניסה
+                    <span className="material-symbols-rounded">login</span>
+
+                </Botton>
+            </Container>
+        </>
     )
 }
 

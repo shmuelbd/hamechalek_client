@@ -51,7 +51,7 @@ const SubCategory = (props: Props) => {
 
 
                 <SubCatIcon key={props.index} loading="lazy"
-                    src={`https://xn--8dbgpg1c.xn--4dbrk0ce/images/${props.item.pic}.jpg`}
+                    src={`https://xndbgpgc.depro2.fcomet.com/images/${props.item.pic}.jpg`}
                 >
                 </SubCatIcon>
                 {props.item.name}

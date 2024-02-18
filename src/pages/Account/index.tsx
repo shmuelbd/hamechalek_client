@@ -3,6 +3,9 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { userDetails } from '../../store/user';
+import { Player } from '@lottiefiles/react-lottie-player';
+const ICON = require('./singinAnimation.json');
+
 
 const Container = styled(motion.div)`
 display: flex;
@@ -41,6 +44,10 @@ border-radius: 5px;
 height: 80px;
 color: #3a3a3a;
 `;
+const IconAnimation = styled(motion.div)`
+width: 100%;
+height: 150px;
+`;
 type Props = {}
 
 const Account = (props: Props) => {
@@ -77,10 +84,23 @@ const Account = (props: Props) => {
                         </Item>
                     </>
                     :
-                    <Item to={"login"} >
-                        כניסה / הרשמה
-                        <span className="material-symbols-rounded">login</span>
-                    </Item>
+                    <>
+                        <IconAnimation>
+
+                            <Player
+                                autoplay
+                                speed={1}
+                                loop={true}
+                                src={ICON}
+                                style={{ height: '100px', width: '150px' }}
+                            >
+                            </Player>
+                        </IconAnimation>
+                        <Item to={"login"} >
+                            כניסה / הרשמה
+                            <span className="material-symbols-rounded">login</span>
+                        </Item>
+                    </>
             }
         </Container>
     )

@@ -51,6 +51,7 @@ border-radius: 50%;
 `;
 
 type Props = {}
+const ICON = require('./saleIcon.json');
 
 
 const SaleBunner = (props: Props) => {
@@ -63,7 +64,7 @@ const SaleBunner = (props: Props) => {
                     autoplay
                     speed={1}
                     loop={true}
-                    src="https://lottie.host/23e20bfe-b448-4d52-8d81-fe473c1419b8/O4gnSrVgOD.json"
+                    src={ICON}
                     style={{ height: '70px', width: '150px' }}
                 >
                 </Player>

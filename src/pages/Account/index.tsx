@@ -45,8 +45,9 @@ height: 80px;
 color: #3a3a3a;
 `;
 const IconAnimation = styled(motion.div)`
+padding-top: 50px;
 width: 100%;
-height: 150px;
+height: 200px;
 `;
 type Props = {}
 
@@ -61,10 +62,10 @@ const Account = (props: Props) => {
 
     return (
         <Container>
-            <Title>הפרופיל שלי</Title>
             {
                 token ?
                     <>
+                        <Title>הפרופיל שלי</Title>
                         <Item to={"lastorders"}>
                             הזמנות אחרונות
                             <span className="material-symbols-rounded">receipt</span>
@@ -86,19 +87,23 @@ const Account = (props: Props) => {
                     :
                     <>
                         <IconAnimation>
-
                             <Player
                                 autoplay
                                 speed={1}
                                 loop={true}
                                 src={ICON}
-                                style={{ height: '100px', width: '150px' }}
+                                style={{ height: '150px', width: '200px' }}
                             >
                             </Player>
                         </IconAnimation>
+                        <Title>היכנסו או הרשמו לאתר </Title>
                         <Item to={"login"} >
-                            כניסה / הרשמה
+                            כניסה
                             <span className="material-symbols-rounded">login</span>
+                        </Item>
+                        <Item to={"login"} >
+                            הרשמה
+                            <span className="material-symbols-rounded">person_add</span>
                         </Item>
                     </>
             }

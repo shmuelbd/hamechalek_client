@@ -8,7 +8,8 @@ import { BoxFiled } from '../../../../components/global-components/inputs/inputs
 import { Botton } from '../../../../components/global-components/buttons/buttons';
 import ProgressBarCustom from '../../../../components/global-components/progressBar/progressBar';
 import { userDetails } from '../../../../store/user';
-import { GET_USER_DETAILS, GET_USER_DETAILS_UPDATE } from '../../../../env';
+import { GET_USER_DETAILS, GET_USER_DETAILS_UPDATE, REACT_APP_RECAPTCHA_KEY } from '../../../../env';
+import { GoogleReCaptchaProvider, GoogleReCaptcha } from "react-google-recaptcha-v3";
 
 type Props = {}
 
@@ -34,6 +35,12 @@ justify-content: center;
 const FiledsNewUser = (props: any) => {
     const [userData, setUserData] = useState<any>({})
     const [edit, setEdit] = useState<any>(true)
+
+    const [token, setToken] = useState("");
+    const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
+    const setTokenFunc = (getToken: any) => {
+        setToken(getToken);
+    };
 
     const styleBox = {
         width: '100%',
@@ -186,8 +193,16 @@ const FiledsNewUser = (props: any) => {
                                    מקסימום 30 תווים
                                 </small> */}
                 </BoxFiled>
+
+                <GoogleReCaptchaProvider reCaptchaKey="6Lddt4cpAAAAAH3Ey9toqEuLwCrUewlJc-mlLGl_">
+                    <GoogleReCaptcha
+                        onVerify={setTokenFunc}
+                    // refreshReCaptcha={refreshReCaptcha}
+                    />
+                </GoogleReCaptchaProvider>
+
                 <Botton onClick={() => sendUserDate()}>
-                    שמירה
+                    שליחה
                     <span className="material-symbols-rounded">done</span>
                 </Botton>
             </ContainerUserDetails >

@@ -10,6 +10,7 @@ import LastOrders from "./Account/LastOrders"
 import OrderDetail from "./Account/LastOrders/OrderDetail"
 import Login from "./Account/login"
 import MyDetails from "./Account/MyDetails"
+import Register from "./Account/Register"
 
 
 const Router = () => {
@@ -28,6 +29,7 @@ const Router = () => {
                     <Route path="myaccount">
                         <Route index element={<Account />} />
                         <Route path="login" element={<Login />} ></Route>
+                        <Route path="register" element={<Register />} ></Route>
                         <Route path="MyDetails" element={<MyDetails />} ></Route>
                         <Route path="signin" element={<Login />} ></Route>
                         <Route path="lastorders"  >

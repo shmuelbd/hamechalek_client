@@ -101,7 +101,7 @@ const Account = (props: Props) => {
                             כניסה
                             <span className="material-symbols-rounded">login</span>
                         </Item>
-                        <Item to={"login"} >
+                        <Item to={"register"} >
                             הרשמה
                             <span className="material-symbols-rounded">person_add</span>
                         </Item>

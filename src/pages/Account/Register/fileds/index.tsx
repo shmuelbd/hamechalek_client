@@ -8,8 +8,8 @@ import { BoxFiled } from '../../../../components/global-components/inputs/inputs
 import { Botton } from '../../../../components/global-components/buttons/buttons';
 import ProgressBarCustom from '../../../../components/global-components/progressBar/progressBar';
 import { userDetails } from '../../../../store/user';
-import { GET_USER_DETAILS, GET_USER_DETAILS_UPDATE, REACT_APP_RECAPTCHA_KEY } from '../../../../env';
-import { GoogleReCaptchaProvider, GoogleReCaptcha } from "react-google-recaptcha-v3";
+import { CREATE_NEW_USER, GET_USER_DETAILS, GET_USER_DETAILS_UPDATE } from '../../../../env';
+import { NavLink } from 'react-router-dom';
 
 type Props = {}
 
@@ -30,17 +30,26 @@ margin-top: 10px;
 /* background-color: #f5f5f5; */
 justify-content: center;
 `;
-
+const Item = styled(NavLink)`
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+width: 100%;
+margin: 5px 15px;
+text-decoration: none;
+cursor: pointer;
+user-select: none;
+border-radius: 5px;
+height: 20px;
+color: #7F5AFF;
+`;
 
 const FiledsNewUser = (props: any) => {
     const [userData, setUserData] = useState<any>({})
     const [edit, setEdit] = useState<any>(true)
-
-    const [token, setToken] = useState("");
-    const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
-    const setTokenFunc = (getToken: any) => {
-        setToken(getToken);
-    };
+    const [redirectToLogin, setRedirectToLogin] = useState<any>(false)
 
     const styleBox = {
         width: '100%',
@@ -54,11 +63,11 @@ const FiledsNewUser = (props: any) => {
     const dataToSend = { ...userData, "token": userDetails.value.token }
 
     const sendUserDate = () => {
-        axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
+        axios.post(CREATE_NEW_USER, dataToSend)
             .then((res) => {
                 setEdit(!edit)
             }).catch((err) => {
-                console.log(err);
+                setRedirectToLogin(true)
             })
     }
 
@@ -104,40 +113,40 @@ const FiledsNewUser = (props: any) => {
                     </small>
                 </BoxFiled>
                 <BoxFiled>
-                    <label htmlFor="street">דירה</label>
-                    <InputText id="street"
-                        aria-describedby="street-help"
+                    <label htmlFor="apartment">דירה</label>
+                    <InputText id="apartment"
+                        aria-describedby="apartment-help"
                         value={userData.apartment}
                         style={styleBox}
                         disabled={!edit}
                         type="number"
                         onChange={(e) => setUserData({ ...userData, apartment: e.target.value })} />
-                    <small id="street-help">
+                    <small id="apartment-help">
                         מקסימום 30 תווים
                     </small>
                 </BoxFiled>
                 <BoxFiled>
-                    <label htmlFor="street">קומה</label>
-                    <InputText id="street"
-                        aria-describedby="street-help"
+                    <label htmlFor="floor">קומה</label>
+                    <InputText id="floor"
+                        aria-describedby="floor-help"
                         value={userData.floor}
                         style={styleBox}
                         disabled={!edit}
                         type="number"
                         onChange={(e) => setUserData({ ...userData, floor: e.target.value })} />
-                    <small id="street-help">
+                    <small id="floor-help">
                         מקסימום 30 תווים
                     </small>
                 </BoxFiled>
                 <BoxFiled>
-                    <label htmlFor="street">מעלית</label>
-                    <InputText id="street"
-                        aria-describedby="street-help"
+                    <label htmlFor="elevator">מעלית</label>
+                    <InputText id="elevator"
+                        aria-describedby="elevator-help"
                         value={userData.elevator}
                         style={styleBox}
                         disabled={!edit}
                         onChange={(e) => setUserData({ ...userData, elevator: e.target.value })} />
-                    <small id="street-help">
+                    <small id="elevator-help">
                         מקסימום 30 תווים
                     </small>
                 </BoxFiled>
@@ -194,17 +203,21 @@ const FiledsNewUser = (props: any) => {
                                 </small> */}
                 </BoxFiled>
 
-                <GoogleReCaptchaProvider reCaptchaKey="6Lddt4cpAAAAAH3Ey9toqEuLwCrUewlJc-mlLGl_">
-                    <GoogleReCaptcha
-                        onVerify={setTokenFunc}
-                    // refreshReCaptcha={refreshReCaptcha}
-                    />
-                </GoogleReCaptchaProvider>
+
 
                 <Botton onClick={() => sendUserDate()}>
                     שליחה
                     <span className="material-symbols-rounded">done</span>
                 </Botton>
+                {
+                    redirectToLogin ?
+                        <>
+                            <Item to={"/myaccount/login"}>
+                                נראה שהלקוח כבר קיים, לחצו כאן להתחברות
+                            </Item>
+                        </>
+                        : null
+                }
             </ContainerUserDetails >
 
         </>

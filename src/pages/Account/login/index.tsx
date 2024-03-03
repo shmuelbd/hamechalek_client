@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { GET_TOKEN_LOGIN } from '../../../env';
 import { userDetails } from '../../../store/user';
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
@@ -26,7 +26,21 @@ font-weight: 900;
 text-align: center;
 height: 80px;
 `;
-
+const Item = styled(NavLink)`
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+font-size: 18px;
+width: 100%;
+margin: 5px 15px;
+text-decoration: none;
+cursor: pointer;
+user-select: none;
+border-radius: 5px;
+height: 20px;
+color: #7F5AFF;
+`;
 
 
 type Props = {}
@@ -97,6 +111,7 @@ const Login = (props: Props) => {
                     <span className="material-symbols-rounded">login</span>
 
                 </Botton>
+                <Item to={"/myaccount/set-password"}>שכחתי סיסמה</Item>
             </Container>
         </>
     )

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { userDetails } from '../../store/user';
 import { Player } from '@lottiefiles/react-lottie-player';
+import Login from './login';
 const ICON = require('./singinAnimation.json');
 
 
@@ -45,9 +46,9 @@ height: 80px;
 color: #3a3a3a;
 `;
 const IconAnimation = styled(motion.div)`
-padding-top: 50px;
+padding-top: 10px;
 width: 100%;
-height: 200px;
+height: 150px;
 `;
 type Props = {}
 
@@ -97,14 +98,17 @@ const Account = (props: Props) => {
                             </Player>
                         </IconAnimation>
                         <Title>היכנסו או הרשמו לאתר </Title>
-                        <Item to={"login"} >
-                            כניסה
+                        <Login />
+
+
+                        {/* <Item to={"login"} >
+                            כניסה / הרשמה
                             <span className="material-symbols-rounded">login</span>
-                        </Item>
-                        <Item to={"register"} >
+                        </Item> */}
+                        {/* <Item to={"register"} >
                             הרשמה
                             <span className="material-symbols-rounded">person_add</span>
-                        </Item>
+                        </Item> */}
                     </>
             }
         </Container>

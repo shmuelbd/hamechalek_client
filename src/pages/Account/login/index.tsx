@@ -82,7 +82,7 @@ const Login = (props: Props) => {
         <>
             {ProgressBar ? <ProgressBarCustom /> : null}
             <Container>
-                <Title>כניסה</Title>
+                {/* <Title>כניסה</Title> */}
                 <BoxFiled>
                     <label htmlFor="first_name">אימייל</label>
                     <InputText id="first_name"
@@ -111,7 +111,7 @@ const Login = (props: Props) => {
                     <span className="material-symbols-rounded">login</span>
 
                 </Botton>
-                <Item to={"/myaccount/set-password"}>שכחתי סיסמה</Item>
+                <Item to={"send-email-forget-password/token/newUser"}>לקוחות חדשים / שכחתי סיסמה</Item>
             </Container>
         </>
     )

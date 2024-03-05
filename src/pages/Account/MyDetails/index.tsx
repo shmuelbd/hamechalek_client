@@ -9,22 +9,43 @@ import { motion } from 'framer-motion';
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 type Props = {}
 
 
+const dataForFromEmail = {
+    "last_name": "",
+    "first_name": "",
+    "street": "",
+    "city": "",
+    "zipcode": "",
+    "apartment": "",
+    "floor": "",
+    "elevator": "",
+    "phone": "",
+    "phone2": "",
+    "fax": "",
+}
 const MyDetails = (props: Props) => {
 
-    const [userData, setUserData] = useState<any>()
+    const [userData, setUserData] = useState<any>(dataForFromEmail)
 
+    const [searchParams] = useSearchParams();
+    const tokenFromQuery = searchParams.get('token');
     useEffect(() => {
+        // if (userDetails.value.token) {
+
         axios.post(GET_USER_DETAILS, {
-            "token": userDetails.value.token
+            "token": tokenFromQuery != null ? tokenFromQuery : userDetails.value.token
         }).then((res) => {
-            setUserData(res.data)
+            console.log(res.data);
+            setUserData({ ...res.data })
         }).catch((err) => {
-            console.log(err);
+            setUserData(dataForFromEmail)
         })
+        // }
+
 
 
     }, [userDetails.value.token])
@@ -32,10 +53,10 @@ const MyDetails = (props: Props) => {
     return (
         <div>
             {
-                userData == undefined ?
+                userData == undefined && tokenFromQuery == null ?
                     <ProgressBarCustom />
                     :
-                    <UserDetails userData={userData} />
+                    <UserDetails userData={userData} edit={tokenFromQuery ? true : false} token={tokenFromQuery ? tokenFromQuery : userDetails.value.token} />
             }
         </div>
     )
@@ -81,13 +102,18 @@ const P = styled(motion.div)`
 font-weight: 900;
 margin-left:5px ;
 `;
+const ShowPass = styled(motion.div)`
+padding-top: 5px;
+color: #7F5AFF;
 
+`;
 
 
 
 const UserDetails = (props: any) => {
     const [userData, setUserData] = useState<any>(props.userData)
-    const [edit, setEdit] = useState<any>(false)
+    const [edit, setEdit] = useState<any>(props.edit)
+    const [showPass, setShowPass] = useState<any>(false)
 
     const styleBox = {
         width: '100%',
@@ -97,9 +123,8 @@ const UserDetails = (props: any) => {
         marginTop: '5px'
 
     }
-    console.log(userData);
 
-    const dataToSend = { ...userData, "token": userDetails.value.token }
+    const dataToSend = { ...userData, "token": props.token }
 
     const sendUserDate = () => {
         axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
@@ -224,7 +249,7 @@ const UserDetails = (props: any) => {
                                 מקסימום 20 תווים
                             </small>
                         </BoxFiled>
-                        <BoxFiled>
+                        {/* <BoxFiled>
                             <label htmlFor="email">אימייל</label>
                             <InputText id="email"
                                 aria-describedby="email-help"
@@ -233,10 +258,10 @@ const UserDetails = (props: any) => {
                                 disabled={!edit}
                                 type='email'
                                 onChange={(e) => setUserData({ ...userData, email: e.target.value })} />
-                            {/* <small id="email-help">
+                            <small id="email-help">
                                    מקסימום 30 תווים
-                                </small> */}
-                        </BoxFiled>
+                                </small>
+                        </BoxFiled> */}
                         <BoxFiled>
                             <label htmlFor="phone">פלאפון</label>
                             <InputText id="phone"
@@ -264,6 +289,30 @@ const UserDetails = (props: any) => {
                                    מקסימום 30 תווים
                                 </small> */}
                         </BoxFiled>
+                        <BoxFiled>
+                            <label htmlFor="phone2">סיסמה חדשה</label>
+                            <InputText id="phone2"
+                                aria-describedby="phone2-help"
+                                value={userData.password}
+                                style={styleBox}
+                                disabled={!edit}
+                                type={showPass ? "text" : "password"}
+                                onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
+                            <ShowPass onClick={() => setShowPass(!showPass)}>הציגו את הסיסמה</ShowPass>
+                        </BoxFiled>
+
+                        {/* <BoxFiled>
+                            <label htmlFor="phone2">הקלידו שוב את הסיסמה</label>
+                            <InputText id="phone2"
+                                aria-describedby="phone2-help"
+                                value={userData.password2}
+                                style={styleBox}
+                                disabled={!edit}
+                                type={showPass ? "text" : "password"}
+                                onChange={(e) => setUserData({ ...userData, password2: e.target.value })} />
+                            <ShowPass onClick={() => setShowPass(!showPass)}>הציגו את הסיסמה</ShowPass>
+
+                        </BoxFiled> */}
                         <Botton onClick={() => sendUserDate()}>
                             שמירה
                             <span className="material-symbols-rounded">done</span>

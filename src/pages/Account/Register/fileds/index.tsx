@@ -8,7 +8,7 @@ import { BoxFiled } from '../../../../components/global-components/inputs/inputs
 import { Botton } from '../../../../components/global-components/buttons/buttons';
 import ProgressBarCustom from '../../../../components/global-components/progressBar/progressBar';
 import { userDetails } from '../../../../store/user';
-import { CREATE_NEW_USER, GET_USER_DETAILS, GET_USER_DETAILS_UPDATE } from '../../../../env';
+// import { CREATE_NEW_USER, GET_USER_DETAILS, GET_USER_DETAILS_UPDATE } from '../../../../env';
 import { NavLink } from 'react-router-dom';
 
 type Props = {}
@@ -63,12 +63,12 @@ const FiledsNewUser = (props: any) => {
     const dataToSend = { ...userData, "token": userDetails.value.token }
 
     const sendUserDate = () => {
-        axios.post(CREATE_NEW_USER, dataToSend)
-            .then((res) => {
-                setEdit(!edit)
-            }).catch((err) => {
-                setRedirectToLogin(true)
-            })
+        // axios.post(CREATE_NEW_USER, dataToSend)
+        //     .then((res) => {
+        //         setEdit(!edit)
+        //     }).catch((err) => {
+        //         setRedirectToLogin(true)
+        //     })
     }
 
     return (

@@ -11,7 +11,7 @@ export const GET_TOKEN_LOGIN = url_api + "auth/signIn";
 export const GET_TOKEN_VERIFY = url_api + "auth/verifyToken";
 export const GET_USER_DETAILS = url_api + "web-shop/user/account/details";
 export const GET_USER_DETAILS_UPDATE = url_api + "web-shop/user/account/details/update";
-export const CREATE_NEW_USER = url_api + "auth/register";
+export const CREATE_NEW_USER_FORGET_PASSWORD = url_api + "auth/forget-password/send-link";
 
 
 

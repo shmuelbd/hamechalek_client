@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { InputText } from 'primereact/inputtext';
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import axios from 'axios';
-import { GET_USER_DETAILS_UPDATE } from '../../../env';
+import { CREATE_NEW_USER_FORGET_PASSWORD, GET_USER_DETAILS_UPDATE } from '../../../env';
 import { useParams } from 'react-router-dom';
 import { userDetails } from '../../../store/user';
 
@@ -48,8 +48,6 @@ const SendEmailForgetPassword = (props: Props) => {
     const [redirectToLogin, setRedirectToLogin] = useState<any>(false)
     const [showPass, setShowPass] = useState<any>(false)
 
-    let { token, newUser } = useParams();
-
 
 
     const styleBox = {
@@ -61,10 +59,10 @@ const SendEmailForgetPassword = (props: Props) => {
 
     }
 
-    const dataToSend = { ...userData, "token": token }
+    const dataToSend = { ...userData }
 
     const sendUserDate = () => {
-        axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
+        axios.post(CREATE_NEW_USER_FORGET_PASSWORD, dataToSend)
             .then((res) => {
                 setEdit(!edit)
             }).catch((err) => {
@@ -73,28 +71,38 @@ const SendEmailForgetPassword = (props: Props) => {
     }
 
     return (
-        <div>
-            <ContainerUserDetails>
-                <Title>אימות משתמש</Title>
+        <>
+            {
+                edit ?
 
-                <BoxFiled>
-                    <label htmlFor="phone2"> כתובת מייל לאימות </label>
-                    <InputText id="phone2"
-                        aria-describedby="phone2-help"
-                        value={userData.password}
-                        style={styleBox}
-                        disabled={!edit}
-                        type="email"
-                        onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
-                </BoxFiled>
+                    <div>
+                        <ContainerUserDetails>
+                            <Title>אימות משתמש</Title>
 
-                <Botton onClick={() => sendUserDate()}>
-                    שליחה
-                    <span className="material-symbols-rounded">done</span>
-                </Botton>
-            </ContainerUserDetails>
+                            <BoxFiled>
+                                <label htmlFor="phone2"> כתובת מייל לאימות </label>
+                                <InputText id="phone2"
+                                    aria-describedby="phone2-help"
+                                    value={userData.password}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type="email"
+                                    onChange={(e) => setUserData({ ...userData, mail: e.target.value })} />
+                            </BoxFiled>
 
-        </div>
+                            <Botton onClick={() => sendUserDate()}>
+                                שליחה
+                                <span className="material-symbols-rounded">done</span>
+                            </Botton>
+                        </ContainerUserDetails>
+
+                    </div>
+                    :
+                    <Title>
+                        מחכה לכם בתיבת המייל הודעה לאימות החשבון שלכם
+                    </Title>
+            }
+        </>
     )
 }
 

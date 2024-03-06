@@ -33,21 +33,23 @@ const MyDetails = (props: Props) => {
 
     const [searchParams] = useSearchParams();
     const tokenFromQuery = searchParams.get('token');
+
     useEffect(() => {
-        // if (userDetails.value.token) {
+        //התנאי הזה הוא בשביל שלא יעשה קריאה ללא שיש טוקן 
+        if (tokenFromQuery != null || userDetails.value.token) {
 
-        axios.post(GET_USER_DETAILS, {
-            "token": tokenFromQuery != null ? tokenFromQuery : userDetails.value.token
-        }).then((res) => {
-            console.log(res.data);
-            setUserData({ ...res.data })
-        }).catch((err) => {
-            setUserData(dataForFromEmail)
-        })
-        // }
+            // setUserData(dataForFromEmail)
+            axios.post(GET_USER_DETAILS, {
+                "token": tokenFromQuery != null ? tokenFromQuery : userDetails.value.token
+            }).then((res) => {
+                setUserData(res.data)
+            }).catch((err) => {
+                setUserData(dataForFromEmail)
+            })
 
+        }
 
-
+        //לצורך ביצוע קריא מיד כשיש טוקן 
     }, [userDetails.value.token])
 
     return (
@@ -56,7 +58,7 @@ const MyDetails = (props: Props) => {
                 userData == undefined && tokenFromQuery == null ?
                     <ProgressBarCustom />
                     :
-                    <UserDetails userData={userData} edit={tokenFromQuery ? true : false} token={tokenFromQuery ? tokenFromQuery : userDetails.value.token} />
+                    <UserDetails userData={userData} setUserData={setUserData} edit={tokenFromQuery ? true : false} token={tokenFromQuery ? tokenFromQuery : userDetails.value.token} />
             }
         </div>
     )
@@ -111,7 +113,6 @@ color: #7F5AFF;
 
 
 const UserDetails = (props: any) => {
-    const [userData, setUserData] = useState<any>(props.userData)
     const [edit, setEdit] = useState<any>(props.edit)
     const [showPass, setShowPass] = useState<any>(false)
 
@@ -124,7 +125,7 @@ const UserDetails = (props: any) => {
 
     }
 
-    const dataToSend = { ...userData, "token": props.token }
+    const dataToSend = { ...props.userData, "token": props.token }
 
     const sendUserDate = () => {
         axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
@@ -138,21 +139,23 @@ const UserDetails = (props: any) => {
     return (
         <>
             <Title>הפרטים שלי</Title>
+
             {
                 !edit
                     ?
                     <>
+
                         <ContainerUserDetailsNotEdit>
-                            <BoxFiledNotEdit><P>שם פרטי:</P>{userData.first_name}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>משפחה:</P>{userData.last_name}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>רחוב:</P>{userData.street}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>דירה:</P>{userData.apartment}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>קומה:</P>{userData.floor}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>מעלית:</P>{userData.elevator}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>עיר:</P>{userData.city}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>אימייל:</P>{userData.email}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>פלאפון:</P>{userData.phone}</BoxFiledNotEdit>
-                            <BoxFiledNotEdit><P>פלאפון נוסף:</P>{userData.phone2}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>שם פרטי:</P>{props.userData.first_name}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>משפחה:</P>{props.userData.last_name}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>רחוב:</P>{props.userData.street}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>דירה:</P>{props.userData.apartment}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>קומה:</P>{props.userData.floor}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>מעלית:</P>{props.userData.elevator}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>עיר:</P>{props.userData.city}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>אימייל:</P>{props.userData.email}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>פלאפון:</P>{props.userData.phone}</BoxFiledNotEdit>
+                            <BoxFiledNotEdit><P>פלאפון נוסף:</P>{props.userData.phone2}</BoxFiledNotEdit>
                         </ContainerUserDetailsNotEdit>
                         <Botton onClick={() => setEdit(!edit)}>
                             עריכה
@@ -160,96 +163,96 @@ const UserDetails = (props: any) => {
                         </Botton>
                     </>
                     :
+                    <>
 
-
-                    <ContainerUserDetails>
-                        <BoxFiled>
-                            <label htmlFor="first_name">שם פרטי</label>
-                            <InputText id="first_name"
-                                aria-describedby="first_name-help"
-                                value={userData.first_name}
-                                style={styleBox}
-                                disabled={!edit}
-                                onChange={(e) => setUserData({ ...userData, first_name: e.target.value })} />
-                            <small id="first_name-help">
-                                מקסימום 20 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="last_name">שם משפחה</label>
-                            <InputText id="last_name"
-                                aria-describedby="last_name-help"
-                                value={userData.last_name}
-                                style={styleBox}
-                                disabled={!edit}
-                                onChange={(e) => setUserData({ ...userData, last_name: e.target.value })} />
-                            <small id="last_name-help">
-                                מקסימום 30 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="street">רחוב</label>
-                            <InputText id="street"
-                                aria-describedby="street-help"
-                                value={userData.street}
-                                style={styleBox}
-                                disabled={!edit}
-                                onChange={(e) => setUserData({ ...userData, street: e.target.value })} />
-                            <small id="street-help">
-                                מקסימום 30 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="street">דירה</label>
-                            <InputText id="street"
-                                aria-describedby="street-help"
-                                value={userData.apartment}
-                                style={styleBox}
-                                disabled={!edit}
-                                type="number"
-                                onChange={(e) => setUserData({ ...userData, apartment: e.target.value })} />
-                            <small id="street-help">
-                                מקסימום 30 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="street">קומה</label>
-                            <InputText id="street"
-                                aria-describedby="street-help"
-                                value={userData.floor}
-                                style={styleBox}
-                                disabled={!edit}
-                                type="number"
-                                onChange={(e) => setUserData({ ...userData, floor: e.target.value })} />
-                            <small id="street-help">
-                                מקסימום 30 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="street">מעלית</label>
-                            <InputText id="street"
-                                aria-describedby="street-help"
-                                value={userData.elevator}
-                                style={styleBox}
-                                disabled={!edit}
-                                onChange={(e) => setUserData({ ...userData, elevator: e.target.value })} />
-                            <small id="street-help">
-                                מקסימום 30 תווים
-                            </small>
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="city">עיר</label>
-                            <InputText id="city"
-                                aria-describedby="city-help"
-                                value={userData.city}
-                                style={styleBox}
-                                disabled={!edit}
-                                onChange={(e) => setUserData({ ...userData, city: e.target.value })} />
-                            <small id="city-help">
-                                מקסימום 20 תווים
-                            </small>
-                        </BoxFiled>
-                        {/* <BoxFiled>
+                        <ContainerUserDetails>
+                            <BoxFiled>
+                                <label htmlFor="first_name">שם פרטי</label>
+                                <InputText id="first_name"
+                                    aria-describedby="first_name-help"
+                                    value={props.userData.first_name}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    onChange={(e) => props.setUserData({ ...props.userData, first_name: e.target.value })} />
+                                <small id="first_name-help">
+                                    מקסימום 20 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="last_name">שם משפחה</label>
+                                <InputText id="last_name"
+                                    aria-describedby="last_name-help"
+                                    value={props.userData.last_name}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    onChange={(e) => props.setUserData({ ...props.userData, last_name: e.target.value })} />
+                                <small id="last_name-help">
+                                    מקסימום 30 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="street">רחוב</label>
+                                <InputText id="street"
+                                    aria-describedby="street-help"
+                                    value={props.userData.street}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    onChange={(e) => props.setUserData({ ...props.userData, street: e.target.value })} />
+                                <small id="street-help">
+                                    מקסימום 30 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="street">דירה</label>
+                                <InputText id="street"
+                                    aria-describedby="street-help"
+                                    value={props.userData.apartment}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type="number"
+                                    onChange={(e) => props.setUserData({ ...props.userData, apartment: e.target.value })} />
+                                <small id="street-help">
+                                    מקסימום 30 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="street">קומה</label>
+                                <InputText id="street"
+                                    aria-describedby="street-help"
+                                    value={props.userData.floor}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type="number"
+                                    onChange={(e) => props.setUserData({ ...props.userData, floor: e.target.value })} />
+                                <small id="street-help">
+                                    מקסימום 30 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="street">מעלית</label>
+                                <InputText id="street"
+                                    aria-describedby="street-help"
+                                    value={props.userData.elevator}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    onChange={(e) => props.setUserData({ ...props.userData, elevator: e.target.value })} />
+                                <small id="street-help">
+                                    מקסימום 30 תווים
+                                </small>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="city">עיר</label>
+                                <InputText id="city"
+                                    aria-describedby="city-help"
+                                    value={props.userData.city}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    onChange={(e) => props.setUserData({ ...props.userData, city: e.target.value })} />
+                                <small id="city-help">
+                                    מקסימום 20 תווים
+                                </small>
+                            </BoxFiled>
+                            {/* <BoxFiled>
                             <label htmlFor="email">אימייל</label>
                             <InputText id="email"
                                 aria-describedby="email-help"
@@ -262,46 +265,46 @@ const UserDetails = (props: any) => {
                                    מקסימום 30 תווים
                                 </small>
                         </BoxFiled> */}
-                        <BoxFiled>
-                            <label htmlFor="phone">פלאפון</label>
-                            <InputText id="phone"
-                                aria-describedby="phone-help"
-                                value={userData.phone}
-                                style={styleBox}
-                                disabled={!edit}
-                                type="number"
-                                pattern="\d*"
-                                onChange={(e) => setUserData({ ...userData, phone: e.target.value })} />
-                            {/* <small id="phone-help">
+                            <BoxFiled>
+                                <label htmlFor="phone">פלאפון</label>
+                                <InputText id="phone"
+                                    aria-describedby="phone-help"
+                                    value={props.userData.phone}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type="number"
+                                    pattern="\d*"
+                                    onChange={(e) => props.setUserData({ ...props.userData, phone: e.target.value })} />
+                                {/* <small id="phone-help">
                                    מקסימום 30 תווים
                                 </small> */}
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="phone2">פלאפון נוסף</label>
-                            <InputText id="phone2"
-                                aria-describedby="phone2-help"
-                                value={userData.phone2}
-                                style={styleBox}
-                                disabled={!edit}
-                                type="number" pattern="\d*"
-                                onChange={(e) => setUserData({ ...userData, phone2: e.target.value })} />
-                            {/* <small id="phone2-help">
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="phone2">פלאפון נוסף</label>
+                                <InputText id="phone2"
+                                    aria-describedby="phone2-help"
+                                    value={props.userData.phone2}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type="number" pattern="\d*"
+                                    onChange={(e) => props.setUserData({ ...props.userData, phone2: e.target.value })} />
+                                {/* <small id="phone2-help">
                                    מקסימום 30 תווים
                                 </small> */}
-                        </BoxFiled>
-                        <BoxFiled>
-                            <label htmlFor="phone2">סיסמה חדשה</label>
-                            <InputText id="phone2"
-                                aria-describedby="phone2-help"
-                                value={userData.password}
-                                style={styleBox}
-                                disabled={!edit}
-                                type={showPass ? "text" : "password"}
-                                onChange={(e) => setUserData({ ...userData, password: e.target.value })} />
-                            <ShowPass onClick={() => setShowPass(!showPass)}>הציגו את הסיסמה</ShowPass>
-                        </BoxFiled>
+                            </BoxFiled>
+                            <BoxFiled>
+                                <label htmlFor="phone2">סיסמה חדשה</label>
+                                <InputText id="phone2"
+                                    aria-describedby="phone2-help"
+                                    value={props.userData.password}
+                                    style={styleBox}
+                                    disabled={!edit}
+                                    type={showPass ? "text" : "password"}
+                                    onChange={(e) => props.setUserData({ ...props.userData, password: e.target.value })} />
+                                <ShowPass onClick={() => setShowPass(!showPass)}>הציגו את הסיסמה</ShowPass>
+                            </BoxFiled>
 
-                        {/* <BoxFiled>
+                            {/* <BoxFiled>
                             <label htmlFor="phone2">הקלידו שוב את הסיסמה</label>
                             <InputText id="phone2"
                                 aria-describedby="phone2-help"
@@ -313,11 +316,12 @@ const UserDetails = (props: any) => {
                             <ShowPass onClick={() => setShowPass(!showPass)}>הציגו את הסיסמה</ShowPass>
 
                         </BoxFiled> */}
-                        <Botton onClick={() => sendUserDate()}>
-                            שמירה
-                            <span className="material-symbols-rounded">done</span>
-                        </Botton>
-                    </ContainerUserDetails >
+                            <Botton onClick={() => sendUserDate()}>
+                                שמירה
+                                <span className="material-symbols-rounded">done</span>
+                            </Botton>
+                        </ContainerUserDetails >
+                    </>
             }
         </>
     )

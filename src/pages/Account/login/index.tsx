@@ -10,6 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
+import { progressBar } from '../../../store/appState';
 
 const Container = styled(motion.div)`
 display: flex;
@@ -51,14 +52,12 @@ const Login = (props: Props) => {
     const navigate = useNavigate();
 
     const load = async () => {
-        setProgressBar(true)
+        progressBar.value = true;
         axios.post(GET_TOKEN_LOGIN, {
-
             "email": loading.email,
             "password": loading.password
-
         }).then((res) => {
-            setProgressBar(false)
+            progressBar.value = false;
             setLoading(false);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
@@ -67,7 +66,7 @@ const Login = (props: Props) => {
 
         }).catch((err) => {
             console.log(err);
-            setProgressBar(false)
+            progressBar.value = false;
         })
 
     };

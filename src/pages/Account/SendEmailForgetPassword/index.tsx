@@ -8,6 +8,9 @@ import axios from 'axios';
 import { CREATE_NEW_USER_FORGET_PASSWORD, GET_USER_DETAILS_UPDATE } from '../../../env';
 import { useParams } from 'react-router-dom';
 import { userDetails } from '../../../store/user';
+import { Player } from '@lottiefiles/react-lottie-player';
+import { progressBar } from '../../../store/appState';
+const ICON = require('./sent_email_anumation.json');
 
 export const BoxFiled = styled(motion.div)`
 width: 90%;
@@ -39,6 +42,19 @@ font-weight: 900;
 text-align: center;
 height: 80px;
 `;
+const P = styled(motion.div)`
+width: 80%;
+font-size: 20px;
+font-weight: 600;
+text-align: center;
+height: 80px;
+`;
+const IconAnimation = styled(motion.div)`
+padding-top: 50px;
+width: 100%;
+height: 250px;
+`;
+
 type Props = {}
 
 const SendEmailForgetPassword = (props: Props) => {
@@ -62,11 +78,16 @@ const SendEmailForgetPassword = (props: Props) => {
     const dataToSend = { ...userData }
 
     const sendUserDate = () => {
+        progressBar.value = true;
         axios.post(CREATE_NEW_USER_FORGET_PASSWORD, dataToSend)
             .then((res) => {
                 setEdit(!edit)
+                progressBar.value = false;
+
             }).catch((err) => {
                 setRedirectToLogin(true)
+                progressBar.value = false;
+
             })
     }
 
@@ -98,9 +119,23 @@ const SendEmailForgetPassword = (props: Props) => {
 
                     </div>
                     :
-                    <Title>
-                        מחכה לכם בתיבת המייל הודעה לאימות החשבון שלכם
-                    </Title>
+                    <ContainerUserDetails>
+                        <IconAnimation>
+                            <Player
+                                autoplay
+                                speed={1.5}
+                                loop={false}
+                                src={ICON}
+                                style={{ height: '150px', width: '200px' }}
+                                keepLastFrame
+                            >
+                            </Player>
+                        </IconAnimation>
+                        <P>
+                            מחכה לכם בתיבת המייל הודעה לאימות החשבון שלכם
+                        </P>
+                    </ContainerUserDetails>
+
             }
         </>
     )

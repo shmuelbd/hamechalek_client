@@ -10,6 +10,7 @@ import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
 import { useParams, useSearchParams } from 'react-router-dom';
+import { progressBar } from '../../../store/appState';
 
 type Props = {}
 
@@ -37,13 +38,16 @@ const MyDetails = (props: Props) => {
     useEffect(() => {
         //התנאי הזה הוא בשביל שלא יעשה קריאה ללא שיש טוקן 
         if (tokenFromQuery != null || userDetails.value.token) {
+            progressBar.value = true;
 
             // setUserData(dataForFromEmail)
             axios.post(GET_USER_DETAILS, {
                 "token": tokenFromQuery != null ? tokenFromQuery : userDetails.value.token
             }).then((res) => {
+                progressBar.value = false;
                 setUserData(res.data)
             }).catch((err) => {
+                progressBar.value = false;
                 setUserData(dataForFromEmail)
             })
 
@@ -128,11 +132,14 @@ const UserDetails = (props: any) => {
     const dataToSend = { ...props.userData, "token": props.token }
 
     const sendUserDate = () => {
+        progressBar.value = true;
         axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
             .then((res) => {
                 setEdit(!edit)
+                progressBar.value = false;
             }).catch((err) => {
                 console.log(err);
+                progressBar.value = false;
             })
     }
 

@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import Header from '../../components/Header';
 import Footer from '../../components/footer/indes';
 import { useState } from "react";
+import ProgressBarCustom from '../../components/global-components/progressBar/progressBar';
+import { progressBar } from '../../store/appState';
 
 const Container = styled.div`
 width: 100%;
@@ -26,6 +28,12 @@ const Layout = (props: Props) => {
     return (
         <Container>
             <Header />
+            {
+                progressBar.value ?
+                    <ProgressBarCustom />
+                    :
+                    null
+            }
             <Outlet />
             <Footer />
         </Container>

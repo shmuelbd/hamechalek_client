@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { progressBar } from '../../../store/appState';
 
 type Props = {}
@@ -119,6 +119,7 @@ color: #7F5AFF;
 const UserDetails = (props: any) => {
     const [edit, setEdit] = useState<any>(props.edit)
     const [showPass, setShowPass] = useState<any>(false)
+    const navigate = useNavigate();
 
     const styleBox = {
         width: '100%',
@@ -136,6 +137,9 @@ const UserDetails = (props: any) => {
         axios.post(GET_USER_DETAILS_UPDATE, dataToSend)
             .then((res) => {
                 setEdit(!edit)
+                console.log(userDetails.value.token);
+                if (!userDetails.value.token)
+                    navigate("/myaccount");
                 progressBar.value = false;
             }).catch((err) => {
                 console.log(err);
@@ -300,8 +304,8 @@ const UserDetails = (props: any) => {
                                 </small> */}
                             </BoxFiled>
                             <BoxFiled>
-                                <label htmlFor="phone2">סיסמה חדשה</label>
-                                <InputText id="phone2"
+                                <label htmlFor="password">סיסמה חדשה</label>
+                                <InputText id="password"
                                     aria-describedby="phone2-help"
                                     value={props.userData.password}
                                     style={styleBox}

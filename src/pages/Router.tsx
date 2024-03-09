@@ -12,6 +12,7 @@ import Login from "./Account/login"
 import MyDetails from "./Account/MyDetails"
 import Register from "./Account/Register"
 import SendEmailForgetPassword from "./Account/SendEmailForgetPassword"
+import Cart from "./Cart"
 
 
 const Router = () => {
@@ -24,7 +25,7 @@ const Router = () => {
                     <Route path="categories" element={<Categories />} />
                     <Route path="profile" element={<Home />} />
                     <Route path="sale" element={<Home />} />
-                    <Route path="cart" element={<Home />} />
+                    <Route path="cart" element={<Cart />} />
                     <Route path="items/:catid" element={<Items />} />
                     <Route path="item/:catid/:itemid" element={<OneItem />} />
                     <Route path="myaccount">

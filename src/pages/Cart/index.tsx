@@ -1,10 +1,34 @@
+import { motion } from 'framer-motion';
 import React from 'react'
+import styled from 'styled-components';
+
+
+const Container = styled.div`
+width: 100%;
+/* min-height: 100vh; */
+background-color: #ffffff;
+padding-bottom: 100px;
+`;
+;
+const Title = styled(motion.div)`
+display: flex;
+flex-wrap: wrap;
+width: 100%;
+font-size: 20px;
+font-weight: 900;
+align-items: center;
+justify-content: center;
+height: 80px;
+`;
 
 type Props = {}
 
 const Cart = (props: Props) => {
     return (
-        <div>Cart</div>
+        <Container>
+            <Title>עגלת קניות</Title>
+
+        </Container>
     )
 }
 

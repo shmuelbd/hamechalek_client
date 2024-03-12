@@ -60,10 +60,10 @@ const ItemDetails = (props: Props) => {
                     null
             }
             {
-                props.item.inPackage ?
+                props.item.sale ?
                     <Box background="#facf0f">
                         <span className="material-symbols-rounded">sell</span>
-                        <p>3 במבצע</p>
+                        <p>{`${props.item.sale}`} במבצע</p>
                     </Box>
                     :
                     null

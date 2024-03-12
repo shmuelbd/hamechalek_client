@@ -101,6 +101,7 @@ const OneItem = () => {
 
     const [item, setItem] = useState<ItemType | any>()
     const [procces, setProcces] = useState<Boolean>(true)
+    console.log("item: ", item);
 
     const price = item?.sale_nis;
     const price_first = price?.split(".")[0];
@@ -156,7 +157,7 @@ const OneItem = () => {
                         <ItemDetails item={item} />
 
                         <Buttons>
-                            <Button onClick={() => add(itemid)}>
+                            <Button onClick={() => add(itemid, item)}>
                                 <span className="material-symbols-rounded">add</span>
                             </Button>
 

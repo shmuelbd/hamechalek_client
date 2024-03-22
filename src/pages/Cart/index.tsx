@@ -8,7 +8,7 @@ import Item from '../../components/item';
 const Container = styled.div`
 width: 100%;
 /* min-height: 100vh; */
-background-color: #f5f5f5f9;
+background-color: #fffffff8;
 padding-bottom: 100px;
 display: flex;
 flex-wrap: wrap;
@@ -34,9 +34,10 @@ align-items: center;
 justify-content: space-between;
 height: 90px;
 background-color: #ffffff;
-border-radius: 8px;
+/* border-radius: 8px; */
 margin: 5px 10px;
 padding: 0 10px;
+border-bottom: 5px dotted #ebebeb;
 `;
 const Image = styled(motion.img) <{ src: string }>`
 src: ${(props) => props.src} ;
@@ -45,7 +46,7 @@ object-fit: cover;
 height: 90%;
 border-radius: 20px;
 vertical-align:middle;
-
+padding-left: 5px;
 `;
 const Amount = styled(motion.div)`
 /* display: flex;
@@ -68,6 +69,7 @@ display: flex;
 flex-wrap: wrap;
 height: 100%;
 justify-content: end;
+width: 70%;
 `;
 
 const ItemPrice = styled(motion.div)`

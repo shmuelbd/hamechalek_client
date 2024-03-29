@@ -1,12 +1,40 @@
 import { signal } from "@preact/signals-react";
+import axios from "axios";
+import { UPDATE_CART } from "../env";
+import { userDetails } from "./user";
+import { progressBar } from "./appState";
 
 
 const getCart = localStorage.getItem("cart") ?? "[]";
 
 export const cartState = signal<any>(JSON.parse(getCart));
 
+const updateCartServer = async (cart: any) => {
 
-export const add = (itemid: string | undefined, item: any) => {
+    return new Promise(async (myResolve, myReject) => {
+        const token = userDetails.value.token;
+
+        await axios.post(UPDATE_CART, {
+            token: token,
+            items: cart
+        })
+            .then((res) => {
+                myResolve(res.data);
+                cartState.value = res.data;
+                progressBar.value = false;
+
+            }).catch((err) => {
+                myReject(err);
+            })
+    });
+
+}
+
+let requstToCartServer: any;
+export const add = async (itemid: string | undefined, item: any) => {
+    clearTimeout(requstToCartServer);
+    progressBar.value = true;
+
     let stateItemsForUpdate = cartState.value;
     let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id == itemid);
     if (filterForUpdate.length > 0)
@@ -24,6 +52,9 @@ export const add = (itemid: string | undefined, item: any) => {
         })
     }
 
+    requstToCartServer = setTimeout(() => {
+        updateCartServer(stateItemsForUpdate)
+    }, 3000);
 
     cartState.value = [...stateItemsForUpdate];
     localStorage.setItem("cart", JSON.stringify(cartState.value));

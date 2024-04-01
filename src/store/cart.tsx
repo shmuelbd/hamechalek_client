@@ -12,10 +12,9 @@ export const cartState = signal<any>(JSON.parse(getCart));
 const updateCartServer = async (cart: any) => {
 
     return new Promise(async (myResolve, myReject) => {
-        const token = userDetails.value.token;
 
         await axios.post(UPDATE_CART, {
-            token: token,
+            token: userDetails.value.token,
             items: cart
         })
             .then((res) => {
@@ -52,9 +51,15 @@ export const add = async (itemid: string | undefined, item: any) => {
         })
     }
 
-    requstToCartServer = setTimeout(() => {
-        updateCartServer(stateItemsForUpdate)
-    }, 3000);
+    //to ensure user are connected
+    if (userDetails.value.token != false) {
+        requstToCartServer = setTimeout(() => {
+            //to ensure user are connected
+            if (userDetails.value.token != false)
+                updateCartServer(stateItemsForUpdate)
+        }, 3000);
+    } else
+        progressBar.value = false;
 
     cartState.value = [...stateItemsForUpdate];
     localStorage.setItem("cart", JSON.stringify(cartState.value));
@@ -63,6 +68,9 @@ export const add = async (itemid: string | undefined, item: any) => {
 
 
 export const less = (itemid: string | undefined) => {
+    clearTimeout(requstToCartServer);
+    progressBar.value = true;
+
     let stateItemsForUpdate = cartState.value;
     stateItemsForUpdate.forEach((item: any) => {
         if (item.id == itemid && item.amount >= 1)
@@ -73,6 +81,23 @@ export const less = (itemid: string | undefined) => {
             stateItemsForUpdate = [...filterForUpdate];
         }
     });
+
+
+    //to ensure user are connected
+    if (userDetails.value.token != false) {
+        requstToCartServer = setTimeout(() => {
+            //to ensure user are connected
+            if (userDetails.value.token != false)
+                updateCartServer(stateItemsForUpdate)
+        }, 3000);
+    } else
+        progressBar.value = false;
+
+
     cartState.value = [...stateItemsForUpdate];
     localStorage.setItem("cart", JSON.stringify(cartState.value));
+
+
+    // cartState.value = [...stateItemsForUpdate];
+    // localStorage.setItem("cart", JSON.stringify(cartState.value));
 }

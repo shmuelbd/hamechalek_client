@@ -20,6 +20,7 @@ const updateCartServer = async (cart: any) => {
             .then((res) => {
                 myResolve(res.data);
                 cartState.value = res.data;
+                localStorage.setItem("cart", JSON.stringify(cartState.value));
                 progressBar.value = false;
 
             }).catch((err) => {

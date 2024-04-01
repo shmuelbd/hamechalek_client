@@ -121,10 +121,10 @@ const Cart = (props: Props) => {
                                     <Amount>{Item.amount} יחי'</Amount>
                                     <ItemPrice>
                                         <Price_second>
-                                            {Number(Item.amount * Item.sale_nis).toFixed(2)?.split(".")[1]}.
+                                            {Number(Item.total).toFixed(2)?.split(".")[1]}.
                                         </Price_second>
                                         <Price_first>
-                                            {Number(Item.amount * Item.sale_nis).toFixed(2)?.split(".")[0]}
+                                            {Number(Item.total).toFixed(2)?.split(".")[0]}
                                         </Price_first>
                                         ₪
                                     </ItemPrice>

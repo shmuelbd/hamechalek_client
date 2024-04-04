@@ -46,7 +46,7 @@ const Items = (props: Props) => {
                 "item_group_id": catid
             }).then((res) => {
                 itemsCategoryState.value = res.data;
-                console.log("itemsCategoryState: ", itemsCategoryState.value);
+                // console.log("itemsCategoryState: ", itemsCategoryState.value);
                 setProcces(false);
             }).catch((err) => {
                 console.log(err);

@@ -101,7 +101,7 @@ const OneItem = () => {
 
     const [item, setItem] = useState<ItemType | any>()
     const [procces, setProcces] = useState<Boolean>(true)
-    console.log("item: ", item);
+    // console.log("item: ", item);
 
     const price = item?.sale_nis;
     const price_first = price?.split(".")[0];
@@ -114,7 +114,7 @@ const OneItem = () => {
                 "item_group_id": catid
             }).then((res) => {
                 itemsCategoryState.value = res.data;
-                console.log("itemsCategoryState: ", itemsCategoryState.value);
+                // console.log("itemsCategoryState: ", itemsCategoryState.value);
                 setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
                 setProcces(false);
                 // getImage();

@@ -14,6 +14,7 @@ export const GET_USER_DETAILS = url_api + "web-shop/user/account/details";
 export const GET_USER_DETAILS_UPDATE = url_api + "web-shop/user/account/details/update";
 export const CREATE_NEW_USER_FORGET_PASSWORD = url_api + "auth/forget-password/send-link";
 export const UPDATE_CART = url_api + "web-shop/user/cart/update-cart";
+export const UPDATE_CART_NO_USER = url_api + "web-shop/cart";
 
 
 

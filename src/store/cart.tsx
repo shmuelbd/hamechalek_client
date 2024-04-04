@@ -1,6 +1,6 @@
 import { signal } from "@preact/signals-react";
 import axios from "axios";
-import { UPDATE_CART } from "../env";
+import { UPDATE_CART, UPDATE_CART_NO_USER } from "../env";
 import { userDetails } from "./user";
 import { progressBar } from "./appState";
 
@@ -11,9 +11,11 @@ export const cartState = signal<any>(JSON.parse(getCart));
 
 const updateCartServer = async (cart: any) => {
 
+    const url = userDetails.value.token ? UPDATE_CART : UPDATE_CART_NO_USER;
+
     return new Promise(async (myResolve, myReject) => {
 
-        await axios.post(UPDATE_CART, {
+        await axios.post(url, {
             token: userDetails.value.token,
             items: cart
         })
@@ -53,14 +55,14 @@ export const add = async (itemid: string | undefined, item: any) => {
     }
 
     //to ensure user are connected
-    if (userDetails.value.token != false) {
-        requstToCartServer = setTimeout(() => {
-            //to ensure user are connected
-            if (userDetails.value.token != false)
-                updateCartServer(stateItemsForUpdate)
-        }, 3000);
-    } else
-        progressBar.value = false;
+    // if (userDetails.value.token != false) {
+    requstToCartServer = setTimeout(() => {
+        //to ensure user are connected
+        // if (userDetails.value.token != false)
+        updateCartServer(stateItemsForUpdate)
+    }, 3000);
+    // } else
+    progressBar.value = false;
 
     cartState.value = [...stateItemsForUpdate];
     localStorage.setItem("cart", JSON.stringify(cartState.value));
@@ -85,14 +87,14 @@ export const less = (itemid: string | undefined) => {
 
 
     //to ensure user are connected
-    if (userDetails.value.token != false) {
-        requstToCartServer = setTimeout(() => {
-            //to ensure user are connected
-            if (userDetails.value.token != false)
-                updateCartServer(stateItemsForUpdate)
-        }, 3000);
-    } else
-        progressBar.value = false;
+    // if (userDetails.value.token != false) {
+    requstToCartServer = setTimeout(() => {
+        //to ensure user are connected
+        // if (userDetails.value.token != false)
+        updateCartServer(stateItemsForUpdate)
+    }, 3000);
+    // } else
+    progressBar.value = false;
 
 
     cartState.value = [...stateItemsForUpdate];

@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { cartState } from '../../store/cart';
 import Item from '../../components/item';
+import { NavLink } from 'react-router-dom';
 
 
 const Container = styled.div`
@@ -25,7 +26,7 @@ align-items: center;
 justify-content: center;
 height: 80px;
 `;
-const BoxItem = styled(motion.div)`
+const BoxItem = styled(NavLink)`
 display: flex;
 width: 100%;
 font-size: 20px;
@@ -38,6 +39,8 @@ background-color: #ffffff;
 margin: 5px 10px;
 padding: 0 10px;
 border-bottom: 5px dotted #ebebeb;
+user-select: none;
+text-decoration: none;
 `;
 const Image = styled(motion.img) <{ src: string }>`
 src: ${(props) => props.src} ;
@@ -112,7 +115,7 @@ const Cart = (props: Props) => {
                 cartState.value.length > 0 ?
                     cartState.value.map((Item: any, index: any) => {
                         return (
-                            <BoxItem key={index}>
+                            <BoxItem key={index} to={`/item/${Item.item_group_id}/${Item.id}`}>
                                 <Image loading={"eager"} src={Item.picture_link} alt="Avatar" />
                                 <ItemName>{Item.item_name}</ItemName>
                                 {/* <Amount>{Number(Item.amount * Item.sale_nis).toFixed(2)} ₪</Amount> */}

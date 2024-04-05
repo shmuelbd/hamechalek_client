@@ -1,11 +1,30 @@
 import { signal } from "@preact/signals-react";
 import axios from "axios";
-import { UPDATE_CART, UPDATE_CART_NO_USER } from "../env";
+import { GET_CART, UPDATE_CART, UPDATE_CART_NO_USER } from "../env";
 import { userDetails } from "./user";
 import { progressBar } from "./appState";
 
 
 const getCart = localStorage.getItem("cart") ?? "[]";
+// const getCart = async () => {
+//     let cart;
+//     if (userDetails.value) {
+//         await axios.post(GET_CART, {
+//             token: userDetails.value.token
+//         })
+//             .then((res) => {
+//                 cart = res.data;
+
+//             }).catch((err) => {
+//                 console.log(err);
+//             })
+//     } else {
+//         cart = localStorage.getItem("cart") ?? "[]";
+//     }
+// return cart
+// }
+
+
 
 export const cartState = signal<any>(JSON.parse(getCart));
 
@@ -56,13 +75,12 @@ export const add = async (itemid: string | undefined, item: any) => {
 
     //to ensure user are connected
     // if (userDetails.value.token != false) {
-    requstToCartServer = setTimeout(() => {
+    requstToCartServer = setTimeout(async () => {
         //to ensure user are connected
         // if (userDetails.value.token != false)
-        updateCartServer(stateItemsForUpdate)
+        await updateCartServer(stateItemsForUpdate)
     }, 3000);
     // } else
-    progressBar.value = false;
 
     cartState.value = [...stateItemsForUpdate];
     localStorage.setItem("cart", JSON.stringify(cartState.value));
@@ -88,13 +106,12 @@ export const less = (itemid: string | undefined) => {
 
     //to ensure user are connected
     // if (userDetails.value.token != false) {
-    requstToCartServer = setTimeout(() => {
+    requstToCartServer = setTimeout(async () => {
         //to ensure user are connected
         // if (userDetails.value.token != false)
-        updateCartServer(stateItemsForUpdate)
+        await updateCartServer(stateItemsForUpdate)
     }, 3000);
     // } else
-    progressBar.value = false;
 
 
     cartState.value = [...stateItemsForUpdate];

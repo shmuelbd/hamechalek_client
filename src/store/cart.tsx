@@ -3,26 +3,31 @@ import axios from "axios";
 import { GET_CART, UPDATE_CART, UPDATE_CART_NO_USER } from "../env";
 import { userDetails } from "./user";
 import { progressBar } from "./appState";
+import { log } from "console";
+
+const token = userDetails.value.token;
+let cart: any = [];
+
+export const user_cart = async () => {
+
+    return new Promise(async (myResolve, myReject) => {
+
+        await axios.post(GET_CART, {
+            token: userDetails.value.token,
+        })
+            .then((res) => {
+                myResolve(res.data);
+                // cartState.value = res.data;
+            }).catch((err) => {
+                myReject(err);
+                cart = []
+            })
+    });
+
+}
 
 
-const getCart = localStorage.getItem("cart") ?? "[]";
-// const getCart = async () => {
-//     let cart;
-//     if (userDetails.value) {
-//         await axios.post(GET_CART, {
-//             token: userDetails.value.token
-//         })
-//             .then((res) => {
-//                 cart = res.data;
-
-//             }).catch((err) => {
-//                 console.log(err);
-//             })
-//     } else {
-//         cart = localStorage.getItem("cart") ?? "[]";
-//     }
-// return cart
-// }
+const getCart = userDetails.value.token ? cart : localStorage.getItem("cart") ?? "[]";
 
 
 
@@ -41,7 +46,10 @@ const updateCartServer = async (cart: any) => {
             .then((res) => {
                 myResolve(res.data);
                 cartState.value = res.data;
-                localStorage.setItem("cart", JSON.stringify(cartState.value));
+                if (!userDetails.value.token) {
+                    localStorage.setItem("cart", JSON.stringify(cartState.value));
+                }
+                // localStorage.setItem("cart", JSON.stringify(cartState.value));
                 progressBar.value = false;
 
             }).catch((err) => {
@@ -83,7 +91,9 @@ export const add = async (itemid: string | undefined, item: any) => {
     // } else
 
     cartState.value = [...stateItemsForUpdate];
-    localStorage.setItem("cart", JSON.stringify(cartState.value));
+    if (!userDetails.value.token) {
+        localStorage.setItem("cart", JSON.stringify(cartState.value));
+    }
 
 }
 
@@ -115,7 +125,9 @@ export const less = (itemid: string | undefined) => {
 
 
     cartState.value = [...stateItemsForUpdate];
-    localStorage.setItem("cart", JSON.stringify(cartState.value));
+    if (!userDetails.value.token) {
+        localStorage.setItem("cart", JSON.stringify(cartState.value));
+    }
 
 
     // cartState.value = [...stateItemsForUpdate];

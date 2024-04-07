@@ -11,6 +11,7 @@ import { Botton } from '../../../components/global-components/buttons/buttons';
 import { BoxFiled } from '../../../components/global-components/inputs/inputs';
 import ProgressBarCustom from '../../../components/global-components/progressBar/progressBar';
 import { progressBar } from '../../../store/appState';
+import { cartState, user_cart } from '../../../store/cart';
 
 const Container = styled(motion.div)`
 display: flex;
@@ -56,14 +57,15 @@ const Login = (props: Props) => {
         axios.post(GET_TOKEN_LOGIN, {
             "email": loading.email,
             "password": loading.password
-        }).then((res) => {
+        }).then(async (res) => {
             progressBar.value = false;
             setLoading(false);
             const token = { token: res.data.token, first_name: res.data.first_name }
             userDetails.value = token;
             localStorage.setItem("user", JSON.stringify(token))
             navigate("/myaccount");
-
+            let cart = await user_cart()
+            cartState.value = cart;
         }).catch((err) => {
             console.log(err);
             progressBar.value = false;

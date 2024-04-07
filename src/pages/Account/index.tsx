@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { userDetails } from '../../store/user';
 import { Player } from '@lottiefiles/react-lottie-player';
 import Login from './login';
+import { cartState } from '../../store/cart';
 const ICON = require('./singinAnimation.json');
 
 
@@ -57,7 +58,8 @@ const Account = (props: Props) => {
 
     const exit = () => {
         userDetails.value = { token: false, first_name: 0 };
-        localStorage.clear();
+        localStorage.removeItem('user');
+        cartState.value = JSON.parse(localStorage.getItem("cart") ?? "[]");
     }
 
 

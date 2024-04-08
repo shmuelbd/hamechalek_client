@@ -36,6 +36,8 @@ type Props = {
 
 
 const ItemDetails = (props: Props) => {
+    let sale = typeof props.item.sale == "string" ? JSON.parse(props.item.sale) ?? "[]" : false;
+    // let sale = JSON.parse(props.item.sale)[0]
     return (
         <Container>
             {
@@ -61,9 +63,10 @@ const ItemDetails = (props: Props) => {
             }
             {
                 props.item.sale ?
-                    <Box background="#facf0f">
+                    <Box background="#be7026">
                         <span className="material-symbols-rounded">sell</span>
-                        <p>{`${props.item.sale}`} במבצע</p>
+                        <p>{` ${sale[0]} במבצע`} </p>
+                        {/* <p>{`במבצע ${sale[0]} ב: ${Number(sale[1]).toFixed(2)} ₪`} </p> */}
                     </Box>
                     :
                     null

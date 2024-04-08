@@ -20,7 +20,7 @@ flex-wrap: wrap;
 justify-content: center;
 align-items: center;
 border-radius: 50%;
-width: 100%;
+width: 80%;
 border-radius: 20px;
 /* min-height: 280px; */
 /* overflow: hidden; */

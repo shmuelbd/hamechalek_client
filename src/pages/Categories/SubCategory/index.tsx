@@ -46,7 +46,7 @@ type Props = {
 const SubCategory = (props: Props) => {
 
     return (
-        <LinkItem to={`/items/${props.item.id}`}>
+        <LinkItem to={`/items/${props.item.cat_id}`}>
             <SubCatItem>
 
 

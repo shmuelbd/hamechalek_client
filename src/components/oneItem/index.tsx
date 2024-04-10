@@ -140,7 +140,7 @@ const OneItem = () => {
                     // <Item item={item} key={`${index}`} />
                     <>
                         <DivImage>
-                            <Image loading={"eager"} src={"https://wrz.co.il/wp-content/uploads/2020/10/%D7%A9%D7%A7%D7%95%D7%A4%D7%99%D7%AA24-1.jpg"} alt="Avatar" />
+                            <Image loading={"eager"} src={item.picture_link} alt="Avatar" />
                         </DivImage>
                         <ItemName>{item.item_name}</ItemName>
 

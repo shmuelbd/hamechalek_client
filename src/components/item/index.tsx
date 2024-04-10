@@ -18,7 +18,9 @@ user-select: none;
 text-decoration: none;
 border-radius: 10px;
 `;
-const Img = styled(motion.img)`
+
+const Img = styled(motion.img) <{ src: string }>`
+src: ${(props) => props.src} ;
 width: 90%;
 height: 150px;
 background-color: #249e9e;
@@ -59,7 +61,7 @@ type Props = {
     // setPopUp: React.Dispatch<React.SetStateAction<any>> 
 }
 
-const Item = (props: Props) => {
+const Item = (props: any) => {
 
     const price = props.item.sale_nis;
     const price_first = price.split(".")[0];
@@ -72,7 +74,7 @@ const Item = (props: Props) => {
             to={`/item/${catid}/${props.item.item_id}`}
         // onClick={() => props.setPopUp(true)}
         >
-            <Img />
+            <Img loading={"eager"} src={props.item.picture_link} alt="Avatar" />
             <ItemName>
                 {props.item.item_name}
             </ItemName>

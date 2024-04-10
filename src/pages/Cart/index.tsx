@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { cartState } from '../../store/cart';
 import Item from '../../components/item';
 import { NavLink } from 'react-router-dom';
+import CheckoutLink from './checkout';
 
 
 const Container = styled.div`
@@ -15,7 +16,6 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 `;
-;
 const Title = styled(motion.div)`
 display: flex;
 flex-wrap: wrap;
@@ -138,6 +138,7 @@ const Cart = (props: Props) => {
                     :
                     null
             }
+            <CheckoutLink />
         </Container>
     )
 }

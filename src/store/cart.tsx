@@ -3,10 +3,14 @@ import axios from "axios";
 import { GET_CART, UPDATE_CART, UPDATE_CART_NO_USER } from "../env";
 import { userDetails } from "./user";
 import { progressBar } from "./appState";
-import { log } from "console";
 
 const token = userDetails.value.token;
-let cart: any = [];
+let cart: any = {
+    items: [],
+    total: 0
+};
+
+let getCart = {}
 
 export const user_cart = async () => {
 
@@ -16,22 +20,23 @@ export const user_cart = async () => {
             token: userDetails.value.token,
         })
             .then((res) => {
+                // return res.data
+                cartState.value = res.data;
                 myResolve(res.data);
-                // cartState.value = res.data;
             }).catch((err) => {
-                myReject(err);
-                cart = []
+                myReject(
+                    JSON.parse(localStorage.getItem("cart") || "")
+                );
             })
     });
 
 }
 
 
-const getCart = userDetails.value.token ? cart : localStorage.getItem("cart") ?? "[]";
 
 
 
-export const cartState = signal<any>(JSON.parse(getCart));
+export const cartState = signal<any>(cart);
 
 const updateCartServer = async (cart: any) => {
 
@@ -90,9 +95,9 @@ export const add = async (itemid: string | undefined, item: any) => {
     }, 3000);
     // } else
 
-    cartState.value = [...stateItemsForUpdate];
+    cartState.value.items = [...stateItemsForUpdate];
     if (!userDetails.value.token) {
-        localStorage.setItem("cart", JSON.stringify(cartState.value));
+        localStorage.setItem("cart", JSON.stringify(cartState.value.items));
     }
 
 }
@@ -102,13 +107,13 @@ export const less = (itemid: string | undefined) => {
     clearTimeout(requstToCartServer);
     progressBar.value = true;
 
-    let stateItemsForUpdate = cartState.value;
+    let stateItemsForUpdate = cartState.value.items;
     stateItemsForUpdate.forEach((item: any) => {
         if (item.id == itemid && item.amount >= 1)
             item.amount--
         if (item.id == itemid && item.amount === 0) {
             let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id != itemid);
-            console.log("filterForUpdate: ", filterForUpdate);
+            // console.log("filterForUpdate: ", filterForUpdate);
             stateItemsForUpdate = [...filterForUpdate];
         }
     });
@@ -124,9 +129,9 @@ export const less = (itemid: string | undefined) => {
     // } else
 
 
-    cartState.value = [...stateItemsForUpdate];
+    cartState.value.items = [...stateItemsForUpdate];
     if (!userDetails.value.token) {
-        localStorage.setItem("cart", JSON.stringify(cartState.value));
+        localStorage.setItem("cart", JSON.stringify(cartState.value.items));
     }
 
 

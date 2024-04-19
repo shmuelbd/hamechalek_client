@@ -5,6 +5,7 @@ import { cartState } from '../../store/cart';
 import Item from '../../components/item';
 import { NavLink } from 'react-router-dom';
 import CheckoutLink from './checkout';
+import { userDetails } from '../../store/user';
 
 
 const Container = styled.div`
@@ -104,16 +105,12 @@ font-weight: 400;
 type Props = {}
 
 const Cart = (props: Props) => {
-
-    console.log("cartState.value: ", cartState.value);
-
-
     return (
         <Container>
             <Title>עגלת קניות</Title>
             {
-                cartState.value.length > 0 ?
-                    cartState.value.map((Item: any, index: any) => {
+                cartState.value.items.length > 0 ?
+                    cartState.value.items.map((Item: any, index: any) => {
                         return (
                             <BoxItem key={index} to={`/item/${Item.item_group_id}/${Item.id}`}>
                                 <Image loading={"eager"} src={Item.picture_link} alt="Avatar" />

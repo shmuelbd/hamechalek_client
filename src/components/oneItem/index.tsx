@@ -106,6 +106,7 @@ const OneItem = () => {
     const price = item?.sale_nis;
     const price_first = price?.split(".")[0];
     const price_second = price?.split(".")[1];
+    console.log(" cartState.value", cartState.value);
 
     useEffect(() => {
         if (itemsCategoryState.value.length < 1 || itemsCategoryState.value.filter((val: any) => val.item_id == itemid).length < 1) {
@@ -115,19 +116,12 @@ const OneItem = () => {
             }).then((res) => {
                 itemsCategoryState.value = res.data;
                 // console.log("itemsCategoryState: ", itemsCategoryState.value);
-                setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
-                setProcces(false);
-                // getImage();
             }).catch((err) => {
                 console.log(err);
             })
-
-        } else {
-            setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
-            setProcces(false);
-            // getImage();
-
         }
+        setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
+        setProcces(false);
 
     }, [])
 
@@ -162,7 +156,7 @@ const OneItem = () => {
                             </Button>
 
                             {
-                                cartState.value.filter((val: any) => val.id == itemid)[0] ? cartState.value.filter((val: any) => val.id == itemid)[0].amount
+                                cartState.value.items.filter((val: any) => val.id == itemid)[0] ? cartState.value.items.filter((val: any) => val.id == itemid)[0].amount
                                     :
                                     0
                             }

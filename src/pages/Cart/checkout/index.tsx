@@ -55,7 +55,7 @@ const CheckoutLink = (props: Props) => {
 
     useEffect(() => {
         let total = 0
-        cartState.value.map((item: any) => total += Number(item.total))
+        cartState.value.items.map((item: any) => total += Number(item.total))
         setSum(total.toFixed(2))
     }, [cartState.value])
 
@@ -66,7 +66,7 @@ const CheckoutLink = (props: Props) => {
                 <Psmall textAligncustom="right">משלוח חינם</Psmall>
             </RightWrapper>
             <LeftWrapper>
-                <P textAligncustom="left">{sum}</P>
+                <P textAligncustom="left">₪{sum}</P>
                 <Psmall textAligncustom="left">משלוח חינם</Psmall>
             </LeftWrapper>
         </Container>

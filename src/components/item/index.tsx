@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { motion } from "framer-motion"
 import { NavLink, useParams } from 'react-router-dom';
@@ -72,7 +72,6 @@ const Item = (props: any) => {
 
         <Container
             to={`/item/${catid}/${props.item.item_id}`}
-        // onClick={() => props.setPopUp(true)}
         >
             <Img loading={"eager"} src={props.item.picture_link} alt="Avatar" />
             <ItemName>

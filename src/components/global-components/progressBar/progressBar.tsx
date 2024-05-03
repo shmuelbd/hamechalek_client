@@ -13,7 +13,7 @@ type Props = {}
 const ProgressBarCustom = (props: Props) => {
     return (
         <Container>
-            <ProgressBar mode="indeterminate" style={{ height: '6px' }}></ProgressBar>
+            <ProgressBar mode="indeterminate" style={{ height: '3px' }}></ProgressBar>
         </Container>
     )
 }

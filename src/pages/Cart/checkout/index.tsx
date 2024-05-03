@@ -7,7 +7,7 @@ import { Skeleton } from 'primereact/skeleton';
 const Container = styled(motion.div)`
 width: 100%;
 height: 130px; 
-background-color: #fffffff8;
+background-color: #ffffffe6;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;

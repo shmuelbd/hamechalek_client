@@ -88,7 +88,7 @@ export const updateCart = async (operation: "add" | "less", itemid: string | und
             stateItemsForUpdate.forEach((item: any) => {
                 if (item.id == itemid) {
                     item.amount = item.amount + 1;
-                    item.sale_nis = false
+                    item.total = false
                 }
             });
         }
@@ -99,7 +99,7 @@ export const updateCart = async (operation: "add" | "less", itemid: string | und
         stateItemsForUpdate.forEach((item: any) => {
             if (item.id == itemid && item.amount >= 1) {
                 item.amount = item.amount - 1;
-                item.sale_nis = false
+                item.total = false
             } if (item.id == itemid && item.amount === 0) {
                 let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id != itemid);
                 // console.log("filterForUpdate: ", filterForUpdate);

@@ -6,6 +6,7 @@ import Item from '../../components/item';
 import { NavLink } from 'react-router-dom';
 import CheckoutLink from './checkout';
 import { userDetails } from '../../store/user';
+import { Skeleton } from 'primereact/skeleton';
 
 
 const Container = styled.div`
@@ -119,15 +120,23 @@ const Cart = (props: Props) => {
                                 <BoxpriceAndAmount>
 
                                     <Amount>{Item.amount} יחי'</Amount>
-                                    <ItemPrice>
-                                        <Price_second>
-                                            {Number(Item.total).toFixed(2)?.split(".")[1]}.
-                                        </Price_second>
-                                        <Price_first>
-                                            {Number(Item.total).toFixed(2)?.split(".")[0]}
-                                        </Price_first>
-                                        ₪
-                                    </ItemPrice>
+                                    {Item.total ?
+
+
+                                        <ItemPrice>
+                                            <Price_second>
+                                                {Number(Item.total).toFixed(2)?.split(".")[1]}.
+                                            </Price_second>
+                                            <Price_first>
+                                                {Number(Item.total).toFixed(2)?.split(".")[0]}
+                                            </Price_first>
+                                            ₪
+                                        </ItemPrice>
+                                        :
+                                        <>
+                                            <Skeleton width="5rem" height="15px"></Skeleton>
+                                        </>
+                                    }
                                 </BoxpriceAndAmount>
                             </BoxItem>
                         )

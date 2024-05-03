@@ -59,7 +59,12 @@ const Account = (props: Props) => {
     const exit = () => {
         userDetails.value = { token: false, first_name: 0 };
         localStorage.removeItem('user');
-        cartState.value = JSON.parse(localStorage.getItem("cart") ?? "[]");
+        let cart: any = {
+            items: [],
+            total: 0
+        };
+        const getCart = localStorage.getItem("cart") ?? cart;
+        cartState.value = JSON.parse(getCart)
     }
 
 

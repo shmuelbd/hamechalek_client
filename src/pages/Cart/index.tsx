@@ -106,6 +106,8 @@ font-weight: 400;
 type Props = {}
 
 const Cart = (props: Props) => {
+    console.log(cartState.value.items.length);
+
     return (
         <Container>
             <Title>עגלת קניות</Title>

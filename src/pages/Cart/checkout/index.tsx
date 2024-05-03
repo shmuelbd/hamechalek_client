@@ -3,11 +3,12 @@ import React from 'react'
 import styled from 'styled-components';
 import { cartState } from '../../../store/cart';
 import { Skeleton } from 'primereact/skeleton';
+import { Botton } from '../../../components/global-components/buttons/buttons';
 
 const Container = styled(motion.div)`
 width: 100%;
 height: 130px; 
-background-color: #ffffffe6;
+background-color: #ffffff;
 display: flex;
 flex-wrap: wrap;
 justify-content: center;
@@ -16,6 +17,7 @@ bottom: 75px !important;
 border-top: 2px solid #e9e9e9f8;
 box-sizing: border-box;
 padding: 5px;
+padding-top: 7px;
 `;
 
 const RightWrapper = styled(motion.div)`
@@ -24,8 +26,10 @@ display: flex;
 flex-wrap: wrap;
 justify-content: right;
 align-content: center;
+padding-right: 10px;
 `;
 const LeftWrapper = styled(motion.div)`
+padding-left: 10px;
 width: 50%;
 display: flex;
 justify-content: left;
@@ -49,6 +53,12 @@ padding: 2px 0;
 display: flex;
 justify-content: left;
 `;
+const ButtonBox = styled(motion.div)`
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+`;
 
 
 
@@ -60,10 +70,10 @@ const CheckoutLink = (props: Props) => {
         <Container>
             <RightWrapper>
                 <P aligncustom="right">סה"כ לתשלום:</P>
-                <Psmall aligncustom="right">משלוח חינם</Psmall>
+                {/* <Psmall aligncustom="right">משלוח חינם</Psmall> */}
             </RightWrapper>
             <LeftWrapper>
-                {cartState.value.total ?
+                {cartState.value.total || cartState.value.total === 0 ?
                     <>
                         <P aligncustom="left">₪
                             {Number(cartState.value.total).toFixed(2)}
@@ -78,11 +88,12 @@ const CheckoutLink = (props: Props) => {
                         <Progress>
                             <Skeleton width="5rem" height="10px"></Skeleton>
                         </Progress>
-
-
                     </>
                 }
             </LeftWrapper>
+            <ButtonBox>
+                <Botton>תשלום</Botton>
+            </ButtonBox>
         </Container>
     )
 }

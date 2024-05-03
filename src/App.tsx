@@ -30,6 +30,15 @@ const App = (props: Props) => {
 
       userDetails.value = tokenjson.token;
     }
+    else {
+      let cart: any = {
+        items: [],
+        total: 0
+      };
+
+      const getCart = localStorage.getItem("cart") ?? cart;
+      cartState.value = JSON.parse(getCart)
+    }
   }, [])
 
 

@@ -12,7 +12,7 @@ export const GetItems = async () => {
             "customer_id": "2"
         });
         // setData(response.data.data);
-        console.log(response.data.data);
+        // console.log(response.data.data);
         return response.data
     } catch (error) {
         console.error(error);

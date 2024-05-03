@@ -34,8 +34,6 @@ export const user_cart = async () => {
 
 
 
-
-
 export const cartState = signal<any>(cart);
 
 const updateCartServer = async (cart: any) => {
@@ -65,60 +63,57 @@ const updateCartServer = async (cart: any) => {
 }
 
 let requstToCartServer: any;
-export const add = async (itemid: string | undefined, item: any) => {
-    clearTimeout(requstToCartServer);
-    progressBar.value = true;
-
-    let stateItemsForUpdate = cartState.value;
-    let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id == itemid);
-    if (filterForUpdate.length > 0)
-        stateItemsForUpdate.forEach((item: any) => {
-            if (item.id == itemid)
-                item.amount++
-        });
-    else {
-        stateItemsForUpdate.push({
-            id: itemid, amount: 1,
-            item_name: item.item_name,
-            item_name_en: item.item_name_en,
-            picture_link: item.picture_link,
-            sale_nis: item.sale_nis
-        })
-    }
-
-    //to ensure user are connected
-    // if (userDetails.value.token != false) {
-    requstToCartServer = setTimeout(async () => {
-        //to ensure user are connected
-        // if (userDetails.value.token != false)
-        await updateCartServer(stateItemsForUpdate)
-    }, 3000);
-    // } else
-
-    cartState.value.items = [...stateItemsForUpdate];
-    if (!userDetails.value.token) {
-        localStorage.setItem("cart", JSON.stringify(cartState.value.items));
-    }
-
-}
-
-
-export const less = (itemid: string | undefined) => {
+export const updateCart = async (operation: "add" | "less", itemid: string | undefined, item?: any) => {
     clearTimeout(requstToCartServer);
     progressBar.value = true;
 
     let stateItemsForUpdate = cartState.value.items;
-    stateItemsForUpdate.forEach((item: any) => {
-        if (item.id == itemid && item.amount >= 1)
-            item.amount--
-        if (item.id == itemid && item.amount === 0) {
-            let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id != itemid);
-            // console.log("filterForUpdate: ", filterForUpdate);
-            stateItemsForUpdate = [...filterForUpdate];
+    let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id == itemid);
+
+    if (operation === "add") {
+
+        //if item does not exist
+        if (filterForUpdate.length < 1) {
+            stateItemsForUpdate.push({
+                id: itemid,
+                amount: 1,
+                item_name: item.item_name,
+                item_name_en: item.item_name_en,
+                picture_link: item.picture_link,
+                sale_nis: item.sale_nis
+            })
         }
-    });
+        //if item exist
+        if (filterForUpdate.length > 0) {
+            stateItemsForUpdate.forEach((item: any) => {
+                if (item.id == itemid) {
+                    item.amount = item.amount + 1;
+                    item.sale_nis = false
+                }
+            });
+        }
+    }
 
+    if (operation === "less") {
 
+        stateItemsForUpdate.forEach((item: any) => {
+            if (item.id == itemid && item.amount >= 1) {
+                item.amount = item.amount - 1;
+                item.sale_nis = false
+            } if (item.id == itemid && item.amount === 0) {
+                let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id != itemid);
+                // console.log("filterForUpdate: ", filterForUpdate);
+                stateItemsForUpdate = [...filterForUpdate];
+            }
+        });
+
+    }
+
+    let newCart = { items: [...stateItemsForUpdate], total: false };
+    cartState.value = newCart
+    if (!userDetails.value.token) {
+        localStorage.setItem("cart", JSON.stringify(cartState.value.items));
+    }
     //to ensure user are connected
     // if (userDetails.value.token != false) {
     requstToCartServer = setTimeout(async () => {
@@ -128,13 +123,80 @@ export const less = (itemid: string | undefined) => {
     }, 3000);
     // } else
 
-
-    cartState.value.items = [...stateItemsForUpdate];
-    if (!userDetails.value.token) {
-        localStorage.setItem("cart", JSON.stringify(cartState.value.items));
-    }
-
-
-    // cartState.value = [...stateItemsForUpdate];
-    // localStorage.setItem("cart", JSON.stringify(cartState.value));
 }
+
+
+
+// export const add = async (itemid: string | undefined, item: any) => {
+//     clearTimeout(requstToCartServer);
+//     progressBar.value = true;
+
+//     let stateItemsForUpdate = cartState.value;
+//     let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id == itemid);
+//     if (filterForUpdate.length > 0)
+//         stateItemsForUpdate.forEach((item: any) => {
+//             if (item.id == itemid)
+//                 item.amount++
+//         });
+//     else {
+//         stateItemsForUpdate.push({
+//             id: itemid, amount: 1,
+//             item_name: item.item_name,
+//             item_name_en: item.item_name_en,
+//             picture_link: item.picture_link,
+//             sale_nis: item.sale_nis
+//         })
+//     }
+
+//     //to ensure user are connected
+//     // if (userDetails.value.token != false) {
+//     requstToCartServer = setTimeout(async () => {
+//         //to ensure user are connected
+//         // if (userDetails.value.token != false)
+//         await updateCartServer(stateItemsForUpdate)
+//     }, 3000);
+//     // } else
+
+//     cartState.value.items = [...stateItemsForUpdate];
+//     if (!userDetails.value.token) {
+//         localStorage.setItem("cart", JSON.stringify(cartState.value.items));
+//     }
+
+// }
+
+
+// export const less = (itemid: string | undefined) => {
+//     clearTimeout(requstToCartServer);
+//     progressBar.value = true;
+
+//     let stateItemsForUpdate = cartState.value.items;
+//     stateItemsForUpdate.forEach((item: any) => {
+//         if (item.id == itemid && item.amount >= 1)
+//             item.amount--
+//         if (item.id == itemid && item.amount === 0) {
+//             let filterForUpdate = stateItemsForUpdate.filter((item: any) => item.id != itemid);
+//             // console.log("filterForUpdate: ", filterForUpdate);
+//             stateItemsForUpdate = [...filterForUpdate];
+//         }
+//     });
+
+
+//     //to ensure user are connected
+//     // if (userDetails.value.token != false) {
+//     requstToCartServer = setTimeout(async () => {
+//         //to ensure user are connected
+//         // if (userDetails.value.token != false)
+//         await updateCartServer(stateItemsForUpdate)
+//     }, 3000);
+//     // } else
+
+
+//     cartState.value.items = [...stateItemsForUpdate];
+//     if (!userDetails.value.token) {
+//         localStorage.setItem("cart", JSON.stringify(cartState.value.items));
+//     }
+
+
+//     // cartState.value = [...stateItemsForUpdate];
+//     // localStorage.setItem("cart", JSON.stringify(cartState.value));
+// }

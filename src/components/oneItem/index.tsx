@@ -6,7 +6,7 @@ import axios from 'axios';
 import ItemDetails from './ItemDetails';
 import { GET_ITEMS } from '../../env';
 import { itemsCategoryState } from '../../store/items';
-import { add, cartState, less } from '../../store/cart';
+import { cartState, updateCart } from '../../store/cart';
 import { Proccesing } from './Proccesing';
 
 const Container = styled(motion.div)`
@@ -106,22 +106,25 @@ const OneItem = () => {
     const price = item?.sale_nis;
     const price_first = price?.split(".")[0];
     const price_second = price?.split(".")[1];
-    console.log(" cartState.value", cartState.value);
+    // console.log(" cartState.value", cartState.value);
 
     useEffect(() => {
-        if (itemsCategoryState.value.length < 1 || itemsCategoryState.value.filter((val: any) => val.item_id == itemid).length < 1) {
 
+        if (itemsCategoryState.value.length < 1 || itemsCategoryState.value.filter((val: any) => val.item_id == itemid).length < 1) {
             axios.post(GET_ITEMS, {
                 "item_group_id": catid
             }).then((res) => {
                 itemsCategoryState.value = res.data;
+                setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
+                setProcces(false);
                 // console.log("itemsCategoryState: ", itemsCategoryState.value);
             }).catch((err) => {
                 console.log(err);
             })
+        } else {
+            setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
+            setProcces(false);
         }
-        setItem(itemsCategoryState.value.filter((val: any) => val.item_id == itemid)[0]);
-        setProcces(false);
 
     }, [])
 
@@ -151,7 +154,7 @@ const OneItem = () => {
                         <ItemDetails item={item} />
 
                         <Buttons>
-                            <Button onClick={() => add(itemid, item)}>
+                            <Button onClick={() => updateCart("add", itemid, item)}>
                                 <span className="material-symbols-rounded">add</span>
                             </Button>
 
@@ -160,7 +163,7 @@ const OneItem = () => {
                                     :
                                     0
                             }
-                            <Button onClick={() => less(itemid)}>
+                            <Button onClick={() => updateCart("less", itemid)}>
                                 <span className="material-symbols-rounded">remove</span>
                             </Button>
                         </Buttons>

@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { cartState } from '../../../store/cart';
-
+import { Skeleton } from 'primereact/skeleton';
 
 const Container = styled(motion.div)`
 width: 100%;
@@ -32,16 +32,22 @@ justify-content: left;
 flex-wrap: wrap;
 align-content: center;
 `;
-const P = styled(motion.div) <{ textAligncustom: string }>`
+const P = styled(motion.div) <{ aligncustom: string }>`
 font-size: 18px;
 font-weight: 600;
 width: 100%;
-text-align:${(props) => props.textAligncustom} ;
+text-align:${(props) => props.aligncustom} ;
 `;
-const Psmall = styled(motion.div) <{ textAligncustom: string }>`
+const Psmall = styled(motion.div) <{ aligncustom: string }>`
 font-size: 14px;
 width: 100%;
-text-align:${(props) => props.textAligncustom} ;
+text-align:${(props) => props.aligncustom} ;
+`;
+const Progress = styled(motion.div)`
+width: 100%;
+padding: 2px 0;
+display: flex;
+justify-content: left;
 `;
 
 
@@ -50,24 +56,32 @@ type Props = {}
 
 const CheckoutLink = (props: Props) => {
 
-    const [cart, setcart] = useState<any>(cartState.value)
-    const [sum, setSum] = useState<any>()
-
-    useEffect(() => {
-        let total = 0
-        cartState.value.items.map((item: any) => total += Number(item.total))
-        setSum(total.toFixed(2))
-    }, [cartState.value])
-
     return (
         <Container>
             <RightWrapper>
-                <P textAligncustom="right">סה"כ לתשלום:</P>
-                <Psmall textAligncustom="right">משלוח חינם</Psmall>
+                <P aligncustom="right">סה"כ לתשלום:</P>
+                <Psmall aligncustom="right">משלוח חינם</Psmall>
             </RightWrapper>
             <LeftWrapper>
-                <P textAligncustom="left">₪{sum}</P>
-                <Psmall textAligncustom="left">משלוח חינם</Psmall>
+                {cartState.value.total ?
+                    <>
+                        <P aligncustom="left">₪
+                            {Number(cartState.value.total).toFixed(2)}
+                        </P>
+                        <Psmall aligncustom="left">משלוח חינם</Psmall>
+                    </>
+                    :
+                    <>
+                        <Progress>
+                            <Skeleton width="7rem" height="15px"></Skeleton>
+                        </Progress>
+                        <Progress>
+                            <Skeleton width="5rem" height="10px"></Skeleton>
+                        </Progress>
+
+
+                    </>
+                }
             </LeftWrapper>
         </Container>
     )

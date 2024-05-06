@@ -35,6 +35,7 @@ display: flex;
 justify-content: left;
 flex-wrap: wrap;
 align-content: center;
+
 `;
 const P = styled(motion.div) <{ aligncustom: string }>`
 font-size: 18px;
@@ -43,9 +44,17 @@ width: 100%;
 text-align:${(props) => props.aligncustom} ;
 `;
 const Psmall = styled(motion.div) <{ aligncustom: string }>`
+display: flex;
+align-items: center;
+justify-content: end;
 font-size: 14px;
 width: 100%;
 text-align:${(props) => props.aligncustom} ;
+& span{
+        margin: 0 2px;
+        font-size: 14px;
+color: #00b800;
+    }
 `;
 const Progress = styled(motion.div)`
 width: 100%;
@@ -78,7 +87,11 @@ const CheckoutLink = (props: Props) => {
                         <P aligncustom="left">₪
                             {Number(cartState.value.total).toFixed(2)}
                         </P>
-                        <Psmall aligncustom="left">משלוח חינם</Psmall>
+                        <Psmall aligncustom="left">
+                            <span className="material-symbols-rounded">task_alt</span>
+                            משלוח חינם
+                        </Psmall>
+
                     </>
                     :
                     <>
@@ -92,7 +105,10 @@ const CheckoutLink = (props: Props) => {
                 }
             </LeftWrapper>
             <ButtonBox>
-                <Botton>תשלום</Botton>
+                <Botton>המשיכו לקופה
+                    <span className="material-symbols-rounded">shopping_cart_checkout</span>
+
+                </Botton>
             </ButtonBox>
         </Container>
     )

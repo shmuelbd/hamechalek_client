@@ -35,9 +35,9 @@ const App = (props: Props) => {
         items: [],
         total: 0
       };
-
-      const getCart = localStorage.getItem("cart") ?? cart;
-      cartState.value = JSON.parse(getCart)
+      const localCart = localStorage.getItem("cart");
+      const getCart = localCart ? JSON.parse(localCart) : cart;
+      cartState.value = getCart
     }
   }, [])
 

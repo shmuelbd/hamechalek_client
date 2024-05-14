@@ -25,7 +25,10 @@ const Router = () => {
                     <Route path="categories" element={<Categories />} />
                     <Route path="profile" element={<Home />} />
                     <Route path="sale" element={<Home />} />
-                    <Route path="cart" element={<Cart />} />
+                    <Route path="cart"  >
+                        <Route index element={<Cart />} />
+                        <Route path="checkout" element={<OrderDetail />} />
+                    </Route>
                     <Route path="items/:catid" element={<Items />} />
                     <Route path="item/:catid/:itemid" element={<OneItem />} />
                     <Route path="myaccount">

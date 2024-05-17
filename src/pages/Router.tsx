@@ -13,6 +13,7 @@ import MyDetails from "./Account/MyDetails"
 import Register from "./Account/Register"
 import SendEmailForgetPassword from "./Account/SendEmailForgetPassword"
 import Cart from "./Cart"
+import Payment from "./Cart/checkout/payment"
 
 
 const Router = () => {
@@ -27,7 +28,7 @@ const Router = () => {
                     <Route path="sale" element={<Home />} />
                     <Route path="cart"  >
                         <Route index element={<Cart />} />
-                        <Route path="checkout" element={<OrderDetail />} />
+                        <Route path="checkout" element={<Payment />} />
                     </Route>
                     <Route path="items/:catid" element={<Items />} />
                     <Route path="item/:catid/:itemid" element={<OneItem />} />

@@ -5,6 +5,7 @@ import { cartState } from '../../../store/cart';
 import { Skeleton } from 'primereact/skeleton';
 import { Botton } from '../../../components/global-components/buttons/buttons';
 import { ProgressBar } from 'primereact/progressbar';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled(motion.div)`
 width: 100%;
@@ -85,6 +86,7 @@ margin-bottom: 10px;
 type Props = {}
 
 const CheckoutLink = (props: Props) => {
+    const navigate = useNavigate();
 
     let percentage = Number(cartState.value.total / 180 * 100).toFixed(0)
     const valueTemplate: any = () => {
@@ -94,6 +96,10 @@ const CheckoutLink = (props: Props) => {
             </React.Fragment>
         );
     };
+
+
+    const moveToPaymentPage = () => navigate("checkout");
+
 
     return (
         <Container>
@@ -134,7 +140,9 @@ const CheckoutLink = (props: Props) => {
                     cartState.value.total || cartState.value.total === 0
                         ?
                         cartState.value.total >= 180 ?
-                            <Botton>המשיכו לקופה
+                            // <Item to={"/"} onClick={() => exit()}>
+
+                            <Botton onClick={moveToPaymentPage}>המשיכו לקופה
                                 <span className="material-symbols-rounded">shopping_cart_checkout</span>
 
                             </Botton>

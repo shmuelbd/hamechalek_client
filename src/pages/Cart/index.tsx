@@ -122,7 +122,7 @@ const Cart = (props: Props) => {
                                 <BoxpriceAndAmount>
 
                                     <Amount>{Item.amount} יחי'</Amount>
-                                    {Item.total ?
+                                    {Item.total != 0 ?
 
 
                                         <ItemPrice>

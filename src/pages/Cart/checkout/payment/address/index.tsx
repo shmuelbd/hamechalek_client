@@ -7,6 +7,7 @@ import { progressBar } from '../../../../../store/appState';
 import { GET_USER_DETAILS } from '../../../../../env';
 import { Botton } from '../../../../../components/global-components/buttons/buttons';
 import { Button_light } from '../../../../../components/global-components/buttons/button_light';
+import { cartState } from '../../../../../store/cart';
 
 const Container = styled(motion.div)`
 width: 100%;
@@ -79,9 +80,9 @@ const PaymentAddress = (props: Props) => {
 
         }
 
-        //לצורך ביצוע קריא מיד כשיש טוקן 
     }, [])
 
+    console.log("userData: ", userData);
 
 
     return (
@@ -90,7 +91,7 @@ const PaymentAddress = (props: Props) => {
 
             <Content>
                 <Title>פרטי משלוח</Title>
-                <P>שם:</P>
+                <P>שם: {userData.last_name}</P>
                 <P>עיר:</P>
                 <P>רחוב:</P>
                 <P>מספר:</P>
@@ -99,6 +100,7 @@ const PaymentAddress = (props: Props) => {
             </Content>
             <Button_light>לשינוי כתובת משלוח</Button_light>
             <Botton>לתשלום מאובטח</Botton>
+            {cartState.value.total}
         </Container>
     )
 }

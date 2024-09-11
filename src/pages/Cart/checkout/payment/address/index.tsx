@@ -6,8 +6,9 @@ import { userDetails } from '../../../../../store/user';
 import { progressBar } from '../../../../../store/appState';
 import { GET_USER_DETAILS } from '../../../../../env';
 import { Botton } from '../../../../../components/global-components/buttons/buttons';
-import { Button_light } from '../../../../../components/global-components/buttons/button_light';
+import { ButtonLight } from '../../../../../components/global-components/buttons/button_light';
 import { cartState } from '../../../../../store/cart';
+import CreditCardSvg from '../../../../../assets/svg/cerdit_card';
 
 const Container = styled(motion.div)`
 width: 100%;
@@ -26,7 +27,7 @@ justify-content: center;
 /* height:17vh; */
 border: 1px solid rgb(224, 224, 224);
 margin: 12px;
-padding: 2px 7px;
+padding: 7px 7px;
 border-radius: 12px;
 `;
 const Title = styled(motion.div)`
@@ -38,6 +39,7 @@ color: #636363;
 const P = styled(motion.div)`
 width: 100%;
 font-size: 12px;
+font-weight: 400;
 text-align: right;
 color: #636363;
 `;
@@ -65,6 +67,8 @@ const PaymentAddress = (props: Props) => {
     useEffect(() => {
         //התנאי הזה הוא בשביל שלא יעשה קריאה ללא שיש טוקן 
         if (userDetails.value.token) {
+            console.log("userDetails true: ", userDetails);
+
             progressBar.value = true;
 
             // setUserData(dataForFromEmail)
@@ -80,7 +84,7 @@ const PaymentAddress = (props: Props) => {
 
         }
 
-    }, [])
+    }, [userDetails.value])
 
     console.log("userData: ", userData);
 
@@ -91,15 +95,27 @@ const PaymentAddress = (props: Props) => {
 
             <Content>
                 <Title>פרטי משלוח</Title>
-                <P>שם: {userData.last_name}</P>
-                <P>עיר:</P>
-                <P>רחוב:</P>
-                <P>מספר:</P>
-                <P>קומה:</P>
-                <P>דירה:</P>
+                <P>{userData.last_name} {userData.first_name}</P>
+                <P>{userData.street} קומה {userData.floor} דירה {userData.apartment}</P>
+                <P>מעלית: {userData.elevator}</P>
+                <P>{userData.city}</P>
+                <P>{userData.phone}</P>
+                <P>{userData.phone2}</P>
             </Content>
-            <Button_light>לשינוי כתובת משלוח</Button_light>
-            <Botton>לתשלום מאובטח</Botton>
+            <ButtonLight>
+                {/* <p> */}
+                לשינוי כתובת משלוח
+                {/* </p> */}
+                <span className="material-symbols-rounded">edit</span>
+            </ButtonLight>
+
+
+
+            <Botton>
+                לתשלום מאובטח
+                {/* <span className="material-symbols-rounded">credit_card</span> */}
+                <CreditCardSvg />
+            </Botton>
             {cartState.value.total}
         </Container>
     )

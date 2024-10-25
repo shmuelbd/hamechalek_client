@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import React from 'react'
 import styled from 'styled-components';
+import Stepper from './stepper';
 
 const Container = styled(motion.div)`
 width: 100%;
@@ -24,7 +25,8 @@ type Props = {}
 const PaymentHeader = (props: Props) => {
     return (
         <Container>
-            <Title>עמוד התשלום</Title>
+            {/* <Title>עמוד התשלום</Title> */}
+            <Stepper />
         </Container>
     )
 }

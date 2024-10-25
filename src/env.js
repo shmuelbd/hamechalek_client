@@ -22,3 +22,8 @@ export const UPDATE_CART_NO_USER = url_api + "web-shop/cart";
 export const REACT_APP_RECAPTCHA_KEY = "6Lddt4cpAAAAAH3Ey9toqEuLwCrUewlJc-mlLGl_";
 export const REACT_APP_RECAPTCHA_SECRET = url_api + "6Lddt4cpAAAAADAOmfMyHk4naa8hcG0oJDLH3bnX";
 
+/* border: 1px solid #7e5affa7; */
+
+export const default_color = "#7e5aff"
+export const vivid_tangerine_color = "#F9958B"
+export const melon_color = "#FFB8B1"
